@@ -1,0 +1,344 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --danger: #ef4444;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --background: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --muted: #64748b;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            margin: 0;
+            padding: 0;
+            color: var(--text);
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 5px solid var(--primary);
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            display: inline-block;
+            animation: rotation 1s linear infinite;
+            margin: 2rem 0;
+        }
+
+        @keyframes rotation {
+            0% { transform: rotate(0deg) }
+            100% { transform: rotate(360deg) }
+        }
+
+        .grid {
+            display: grid;
+            gap: 1.5rem;
+            padding: 1rem 0;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.25rem;
+        }
+
+        .server-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .status-badge {
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            text-transform: capitalize;
+        }
+
+        .status-active {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-suspended {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .server-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--muted);
+            font-size: 0.875rem;
+        }
+
+        .detail-icon {
+            width: 20px;
+            color: var(--primary);
+        }
+
+        .delete-btn {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .delete-btn:hover {
+            background: #dc2626;
+            transform: translateY(-1px);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .page-btn {
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .page-btn:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .page-info {
+            font-size: 0.875rem;
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        @media (max-width: 640px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (min-width: 640px) and (max-width: 1024px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">Server Dashboard</h1>
+        </div>
+        <div id="loading" class="loading-spinner"></div>
+        <div id="server-grid" class="grid" style="display: none;"></div>
+        <div class="pagination">
+            <button id="prev-page" class="page-btn">Previous</button>
+            <span id="page-info" class="page-info"></span>
+            <button id="next-page" class="page-btn">Next</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript remains unchanged as per requirement
+        let currentPage = 1;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            loadServers(currentPage);
+        });
+
+        async function loadServers(page) {
+            const loading = document.getElementById('loading');
+            const serverGrid = document.getElementById('server-grid');
+            const pageInfo = document.getElementById('page-info');
+            const prevPageButton = document.getElementById('prev-page');
+            const nextPageButton = document.getElementById('next-page');
+
+            try {
+                const response = await fetch(`/api/list-servers?page=${page}`);
+                const data = await response.json();
+
+                if (!data.data || data.data.length === 0) {
+                    serverGrid.innerHTML = '<p class="text-center col-span-full">No servers found.</p>';
+                    return;
+                }
+
+                serverGrid.innerHTML = '';
+                data.data.forEach(server => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `
+                        <div class="card-header">
+                            <h3 class="server-name">
+                                <i class="fas fa-server"></i>
+                                ${server.name}
+                            </h3>
+                            <span class="status-badge ${server.suspended ? 'status-suspended' : 'status-active'}">
+                                ${server.suspended ? 'Suspended' : 'Active'}
+                            </span>
+                        </div>
+                        <div class="server-details">
+                            <div class="detail-item">
+                                <i class="fas fa-microchip detail-icon"></i>
+                                <span>${server.cpu} Cores</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-memory detail-icon"></i>
+                                <span>${server.memory} GB RAM</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-hdd detail-icon"></i>
+                                <span>${server.disk} GB Storage</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-id-card detail-icon"></i>
+                                <span>ID: ${server.id}</span>
+                            </div>
+                        </div>
+                        <button class="delete-btn" onclick="deleteServer('${server.id}')">
+                            <i class="fas fa-trash"></i>
+                            Delete Server
+                        </button>
+                    `;
+                    serverGrid.appendChild(card);
+                });
+
+                pageInfo.textContent = `Page ${data.page} of ${data.total_pages}`;
+                prevPageButton.disabled = data.page === 1;
+                nextPageButton.disabled = data.page === data.total_pages;
+            } catch (error) {
+                console.error(error);
+                serverGrid.innerHTML = '<p class="text-center col-span-full">Failed to load servers.</p>';
+            } finally {
+                loading.style.display = 'none';
+                serverGrid.style.display = 'grid';
+            }
+        }
+
+        async function deleteServer(id) {
+            if (confirm('Are you sure you want to delete this server?')) {
+                try {
+                    const response = await fetch(`/api/delete-server/${id}`, {
+                        method: 'DELETE'
+                    });
+                    const result = await response.json();
+                    if (response.ok) {
+                        alert('Server deleted successfully.');
+                        loadServers(currentPage);
+                    } else {
+                        alert(`Error: ${result.error}`);
+                    }
+                } catch (error) {
+                    console.error(error);
+                    alert('An error occurred while deleting the server.');
+                }
+            }
+        }
+
+        document.getElementById('prev-page').addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                loadServers(currentPage);
+            }
+        });
+
+        document.getElementById('next-page').addEventListener('click', () => {
+            currentPage++;
+            loadServers(currentPage);
+        });
+    </script>
+</body>
+</html>

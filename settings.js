@@ -1,0 +1,16 @@
+
+const YOUR_MEMID = "OK931165"; //Memberid Order Kuota 
+const YOUR_KEYORKUT = "33021431731514001931165OKCT2CE38BA3DC4C870D9094147332FCEF80"; //Apikey Order Kuota 
+const YOUR_QR_CODE = "00020101021126670016COM.NOBUBANK.WWW01189360050300000879140214135152866177810303UMI51440014ID.CO.QRIS.WWW0215ID20232438849050303UMI5204511153033605802ID5908MRWIBUSS6013JAKARTA TIMUR61051311062070703A0163043C15"; //QR Order Kuota 
+const domain = 'https://pteropublic.vcloudxossrv.me'; //Your Domain
+const apikey = 'ptla_uuwKYyHDdFaIdUqIMgSKFaXViZNFGQFbrW1IG9SDYjX'; //Your Apikey 
+const KeyApi = '3afae5ac4512a8507afda661252bbe73'; //Apikey from https://api-linecloud.digital-server.biz.id
+
+module.exports = {
+    YOUR_MEMID,
+    YOUR_KEYORKUT,
+    YOUR_QR_CODE,
+    domain,
+    apikey,
+    KeyApi
+};

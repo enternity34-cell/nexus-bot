@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Control Panel</title>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #0a0a2e, #1a1a4a);
+            overflow: hidden;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 228, 255, 0.2);
+            max-width: 1000px;
+            width: 95%;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+            border: 1px solid rgba(0, 228, 255, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 15px rgba(0, 228, 255, 0.5);
+            letter-spacing: 1px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #a0a0c0;
+            margin-bottom: 2.5rem;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 25px;
+            margin: 0 auto;
+        }
+
+        .card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem 1.5rem;
+            border-radius: 15px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            overflow: hidden;
+            border: 1px solid rgba(0, 228, 255, 0.1);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(0, 228, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 25px rgba(0, 228, 255, 0.3);
+        }
+
+        .card i {
+            font-size: 2.8rem;
+            margin-bottom: 1.2rem;
+            background: linear-gradient(45deg, #00e4ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover i {
+            transform: scale(1.2);
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            color: #fff;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            color: rgba(160, 160, 192, 0.8);
+            font-size: 0.9rem;
+            z-index: 1000;
+        }
+
+        footer a {
+            color: #00e4ff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #00ff88;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .grid-container {
+            perspective: 1000px;
+        }
+
+        .card {
+            transform-style: preserve-3d;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 2rem 1rem;
+                margin: 1rem;
+            }
+            
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .ripple {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.4);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            border-radius: 50%;
+            animation: rippleEffect 0.6s linear;
+        }
+
+        @keyframes rippleEffect {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 1;
+            }
+            100% {
+                width: 400px;
+                height: 400px;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <div class="content">
+        <h1>Selamat Datang</h1>
+        <p>Website Control Panel</p>
+        <div class="grid-container">
+            <div class="card" onclick="openLink('/buy/panel')">
+                <i class="fas fa-dove"></i>
+                <h3>Buy Panel</h3>
+            </div>
+            <div class="card" onclick="openLink('/buy/admin')">
+                <i class="fas fa-crown"></i>
+                <h3>Buy Admin</h3>
+            </div>
+            <div class="card" onclick="openLink('/create/panel')">
+                <i class="fas fa-dove"></i>
+                <h3>Create Panel</h3>
+            </div>
+            <div class="card" onclick="openLink('/create/admin')">
+                <i class="fas fa-crown"></i>
+                <h3>Create Admin</h3>
+            </div>
+            <div class="card" onclick="openLink('/list/user')">
+                <i class="fas fa-user"></i>
+                <h3>List User</h3>
+            </div>
+            <div class="card" onclick="openLink('/list/server')">
+                <i class="fas fa-server"></i>
+                <h3>List Server</h3>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Website Control Panel By Wira<br>
+        <a href="https://wa.me/6283879152564">
+            <i class="fab fa-whatsapp"></i> Beli Script Di Sini
+        </a>
+    </footer>
+
+    <script>
+        function openLink(url) {
+            // Add ripple effect
+            const ripple = document.createElement('div');
+            ripple.classList.add('ripple');
+            document.body.appendChild(ripple);
+            
+            // Set position
+            const rect = event.target.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+
+            // Remove ripple after animation
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+
+            // Navigate after slight delay
+            setTimeout(() => {
+                window.location.href = url;
+            }, 300);
+        }
+
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 120, density: { enable: true, value_area: 1000 } },
+                color: { value: "#00e4ff" },
+                shape: { 
+                    type: "circle",
+                    stroke: { width: 0, color: "#000000" }, 
+                },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                move: { 
+                    enable: true, 
+                    speed: 2, 
+                    direction: "top", 
+                    out_mode: "out",
+                    straight: false,
+                    bounce: false,
+                },
+                line_linked: { 
+                    enable: true, 
+                    distance: 150, 
+                    color: "#00e4ff", 
+                    opacity: 0.3, 
+                    width: 1 
+                }
+            },
+            interactivity: {  
+                detect_on: "canvas",  
+                events: {  
+                    onhover: { enable: false },
+                    onclick: { enable: false },
+                    resize: true  
+                }  
+            }
+        });
+    </script>
+</body>
+</html>
