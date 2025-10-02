@@ -45,18 +45,33 @@
 
     /* 🔹 Kotak Login */
     .container {
-      background: rgba(20, 20, 20, 0.8);
-      backdrop-filter: blur(10px);
-      padding: 2rem;
-      border-radius: 1.2rem;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
-      width: 90%;
-      max-width: 380px;
-      z-index: 2;
-      position: relative;
-      animation: fadeIn 1s ease;
-    }
+  background: rgba(30, 41, 59, 0.75);
+  backdrop-filter: blur(12px);
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  
+  /* Efek cahaya lembut di luar */
+  box-shadow: 
+    0 0 25px rgba(255, 255, 255, 0.12),
+    0 15px 35px rgba(0, 0, 0, 0.25),
+    inset 0 0 8px rgba(255, 255, 255, 0.05);
+  
+  max-width: 400px;
+  width: 90%;
+  position: relative;
+  z-index: 2;
+  transition: box-shadow 0.4s ease;
+}
+
+/* Saat kursor hover di area container — nambah efek cahaya */
+.container:hover {
+  box-shadow:
+    0 0 35px rgba(255, 255, 255, 0.18),
+    0 15px 35px rgba(0, 0, 0, 0.3),
+    inset 0 0 10px rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
 
     h1 {
       text-align: center;
