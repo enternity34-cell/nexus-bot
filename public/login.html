@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login Panel</title>
+  <title>Login</title>
 
   <!-- Particles.js -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -40,6 +40,7 @@
       height: 100%;
       z-index: 1;
       background: transparent;
+      pointer-events: none; 
     }
 
     /* 🔹 Kotak Login */
@@ -92,8 +93,11 @@
     }
 
     input:focus {
-      border-color: #ffffff;
-      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+    border-color: #ffffff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.35); /* 🌟 Tambah efek glow lembut */
+    outline: none;
+    background: rgba(255, 255, 255, 0.08); /* sedikit lebih terang saat aktif */
+    transition: all 0.3s ease;
     }
 
     button {
@@ -172,7 +176,7 @@
   <div id="particles-js"></div>
 
   <div class="container">
-    <h1><i class="fas fa-shield-alt"></i> Login Panel</h1>
+    <h1><i class="fas fa-shield-alt"></i> Login</h1>
 
     <div class="form-group">
       <label for="username"><i class="fas fa-user"></i> Username</label>
