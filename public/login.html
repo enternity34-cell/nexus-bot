@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login</title>
+  <title>パネル</title>
 
   <!-- Particles.js -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -33,45 +33,39 @@
       position: relative;
     }
 
-    /* 🔹 Partikel putih */
     #particles-js {
       position: fixed;
       width: 100%;
       height: 100%;
       z-index: 1;
       background: transparent;
-      pointer-events: none; 
+      pointer-events: none;
     }
 
-    /* 🔹 Kotak Login */
     .container {
-  background: rgba(15, 15, 15, 0.75);
-  backdrop-filter: blur(12px);
-  padding: 2.5rem;
-  border-radius: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  
-  /* Efek cahaya lembut di luar */
-  box-shadow: 
-    0 0 25px rgba(255, 255, 255, 0.12),
-    0 15px 35px rgba(0, 0, 0, 0.25),
-    inset 0 0 8px rgba(255, 255, 255, 0.05);
-  
-  max-width: 400px;
-  width: 90%;
-  position: relative;
-  z-index: 2;
-  transition: box-shadow 0.4s ease;
-}
+      background: rgba(15, 15, 15, 0.75);
+      backdrop-filter: blur(12px);
+      padding: 2.5rem;
+      border-radius: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 
+        0 0 25px rgba(255, 255, 255, 0.12),
+        0 15px 35px rgba(0, 0, 0, 0.25),
+        inset 0 0 8px rgba(255, 255, 255, 0.05);
+      width: 90%;
+      max-width: 480px;
+      position: relative;
+      z-index: 2;
+      transition: box-shadow 0.4s ease;
+    }
 
-/* Saat kursor hover di area container — nambah efek cahaya */
-.container:hover {
-  box-shadow:
-    0 0 35px rgba(255, 255, 255, 0.18),
-    0 15px 35px rgba(0, 0, 0, 0.3),
-    inset 0 0 10px rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
-}
+    .container:hover {
+      box-shadow:
+        0 0 35px rgba(255, 255, 255, 0.18),
+        0 15px 35px rgba(0, 0, 0, 0.3),
+        inset 0 0 10px rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
 
     h1 {
       text-align: center;
@@ -82,116 +76,80 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       letter-spacing: 0.5px;
-    }
-
-    .form-group {
-      margin-bottom: 1.2rem;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 0.4rem;
-      color: #c9c9c9;
-      font-size: 0.9rem;
-    }
-
-    input {
-      width: 100%;
-      padding: 0.75rem;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 0.5rem;
-      background: rgba(255, 255, 255, 0.05);
-      color: #fff;
-      font-size: 0.95rem;
-      outline: none;
-      transition: 0.3s ease;
-    }
-
-    input:focus {
-    border-color: #ffffff;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.35); /* 🌟 Tambah efek glow lembut */
-    outline: none;
-    background: rgba(255, 255, 255, 0.08); /* sedikit lebih terang saat aktif */
-    transition: all 0.3s ease;
-    }
-
-    button {
-  width: 100%;
-  padding: 0.9rem;
-  background: linear-gradient(135deg, #f5f5f5 0%, #dcdcdc 50%, #bfbfbf 100%);
-  color: #111;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0.75rem;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
-  transition: all 0.3s ease, box-shadow 0.3s ease;
-}
-
-    button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15),
-              inset 0 0 10px rgba(255, 255, 255, 0.15);
-}
-
-button:active {
-  transform: scale(0.98);
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.25),
-              inset 0 0 8px rgba(255, 255, 255, 0.25);
-  background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 60%, #c2c2c2 100%);
-}
-
-    /* 🔹 Popup */
-    .popup {
-      position: fixed;
-      top: 30px;
-      right: 30px;
-      padding: 1rem 1.5rem;
-      border-radius: 10px;
-      font-weight: 500;
-      font-size: 0.95rem;
-      z-index: 9999;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(-10px);
-      transition: all 0.4s ease;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
     }
 
-    .popup.show {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
+    .scroll-container {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding-bottom: 10px;
     }
 
-    .popup.success {
-      background: rgba(34, 197, 94, 0.2);
-      border: 1px solid rgba(34, 197, 94, 0.5);
-      color: #bbf7d0;
+    .card {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      min-width: 220px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 16px;
+      backdrop-filter: blur(8px);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      flex-shrink: 0;
     }
 
-    .popup.error {
-      background: rgba(239, 68, 68, 0.2);
-      border: 1px solid rgba(239, 68, 68, 0.5);
-      color: #fecaca;
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
     }
 
-    .popup i {
+    .card-icon {
+      font-size: 1.8rem;
+      color: white;
+    }
+
+    .card-text h3 {
+      margin: 0;
       font-size: 1.1rem;
+      font-weight: 600;
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .card-text p {
+      margin: 4px 0 0;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .security {
+      margin-top: 25px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .security i {
+      font-size: 1rem;
+      color: #fff;
+      background: linear-gradient(135deg, #fff, #bfbfbf);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    ::-webkit-scrollbar {
+      height: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
     }
   </style>
 </head>
@@ -199,94 +157,74 @@ button:active {
   <div id="particles-js"></div>
 
   <div class="container">
-    <h1><i class="fas fa-shield-alt"></i> Login</h1>
+    <h1>🎮 パネル</h1>
 
-    <div class="form-group">
-      <label for="username"><i class="fas fa-user"></i> Username</label>
-      <input type="text" id="username" placeholder="Masukkan username" />
+    <div class="scroll-container">
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-user-gear"></i></div>
+        <div class="card-text">
+          <h3>AKUN</h3>
+          <p>Atur pengaturan akun bot anda di sini!</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-server"></i></div>
+        <div class="card-text">
+          <h3>SERVER</h3>
+          <p>Kelola dan pantau performa server real-time!</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-user-shield"></i></div>
+        <div class="card-text">
+          <h3>ADMIN</h3>
+          <p>Atur izin dan kontrol penuh pengguna admin!</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+        <div class="card-text">
+          <h3>MONITOR</h3>
+          <p>Pantau aktivitas sistem dan status bot Anda!</p>
+        </div>
+      </div>
     </div>
 
-    <div class="form-group">
-      <label for="password"><i class="fas fa-lock"></i> Password</label>
-      <input type="password" id="password" placeholder="Masukkan password" />
+    <div class="security">
+      <i class="fas fa-lock"></i>
+      <span>Data anda dilindungi dengan sistem keamanan terenkripsi</span>
     </div>
-
-    <button id="loginBtn">Masuk</button>
-  </div>
-
-  <!-- 🔹 Popup -->
-  <div id="popup" class="popup">
-    <i class="fas fa-info-circle"></i><span id="popupMsg"></span>
   </div>
 
   <script>
   particlesJS('particles-js', {
-  particles: {
-    number: { value: 100 },
-    color: { value: '#ffffff' },
-    shape: { type: 'circle' },
-    opacity: { value: 0.8 },
-    size: { value: 2.5 },
-    line_linked: {
-      enable: true,
-      distance: 150,
-      color: '#ffffff',
-      opacity: 0.25,
-      width: 1,
+    particles: {
+      number: { value: 100 },
+      color: { value: '#ffffff' },
+      shape: { type: 'circle' },
+      opacity: { value: 0.8 },
+      size: { value: 2.5 },
+      line_linked: {
+        enable: true,
+        distance: 150,
+        color: '#ffffff',
+        opacity: 0.25,
+        width: 1,
+      },
+      move: { enable: true, speed: 1.3 }
     },
-    move: {
-      enable: true,
-      speed: 1.3,
-      direction: "none",
-      random: false,
-      straight: false,
-      out_mode: "out",
-      bounce: false
-    }
-  },
-  interactivity: {
-    detect_on: "canvas",
-    events: {
-      onhover: { enable: true, mode: "repulse" },
-      onclick: { enable: true, mode: "push" },
-      resize: true
+    interactivity: {
+      events: {
+        onhover: { enable: true, mode: "repulse" },
+        onclick: { enable: true, mode: "push" }
+      },
+      modes: { repulse: { distance: 100 }, push: { particles_nb: 4 } }
     },
-    modes: {
-      repulse: { distance: 100, duration: 0.4 },
-      push: { particles_nb: 4 }
-    }
-  },
-  retina_detect: true
-});
-
-    // 🔹 Popup
-    const popup = document.getElementById('popup');
-    const popupMsg = document.getElementById('popupMsg');
-
-    function showPopup(message, type) {
-      popupMsg.textContent = message;
-      popup.className = `popup ${type} show`;
-      popup.querySelector("i").className = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
-      setTimeout(() => popup.classList.remove('show'), 3000);
-    }
-
-    // 🔹 Logika Login
-    const loginBtn = document.getElementById('loginBtn');
-    loginBtn.addEventListener('click', () => {
-      const user = document.getElementById('username').value.trim();
-      const pass = document.getElementById('password').value.trim();
-
-      if (!user || !pass) {
-        showPopup('Harap isi semua kolom!', 'error');
-        return;
-      }
-
-      if (user === 'admin' && pass === '12345') {
-        showPopup('Login berhasil!', 'success');
-      } else {
-        showPopup('Username atau password salah!', 'error');
-      }
-    });
+    retina_detect: true
+  });
   </script>
 </body>
 </html>
