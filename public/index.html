@@ -22,8 +22,7 @@
 
     body {
       min-height: 100vh;
-      background: radial-gradient(circle at center, #000000 70%, #1a1a1a 100%),
-                  linear-gradient(to right, rgba(255,255,255,0.08), #000, rgba(255,255,255,0.08));
+      background: radial-gradient(circle at center, #000 70%, #1a1a1a 100%);
       background-blend-mode: overlay;
       color: #fff;
       overflow-x: hidden;
@@ -40,25 +39,22 @@
       pointer-events: none;
     }
 
-    /* Kontainer utama */
     .container {
       position: relative;
       z-index: 2;
-      max-width: 1200px;
+      max-width: 1000px;
       margin: 0 auto;
       padding: 2rem;
     }
 
-    /* Header */
     .header {
-      text-align: center;
-      margin-bottom: 3rem;
-      position: relative;
+      text-align: left;
+      margin-bottom: 2.5rem;
       animation: fadeIn 1s ease;
     }
 
     .header h1 {
-      font-size: 3.2rem;
+      font-size: 2.8rem;
       background: linear-gradient(90deg, #ffffff, #d1d5db);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -67,100 +63,98 @@
     }
 
     .header p {
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: #c9c9c9;
       max-width: 600px;
-      margin: 0 auto;
+      margin-top: 0.5rem;
       line-height: 1.6;
     }
 
-    /* Grid */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      padding: 2rem 0;
+    /* Scrollable Button Row */
+    .button-row {
+      display: flex;
+      gap: 1.2rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      scroll-behavior: smooth;
     }
 
-    /* Card panel */
-    .card {
-      background: rgba(15, 15, 15, 0.75);
+    .button-row::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .button-row::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+    }
+
+    /* Tombol Futuristik */
+    .btn-panel {
+      flex: 0 0 auto;
+      padding: 1.2rem 2rem;
+      border-radius: 0.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(15, 15, 15, 0.7);
       backdrop-filter: blur(10px);
-      border-radius: 1rem;
-      padding: 2rem;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow:
-        0 0 15px rgba(255, 255, 255, 0.04),
-        inset 0 0 8px rgba(255, 255, 255, 0.03);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+      color: #fff;
+      font-weight: 500;
+      font-size: 1.05rem;
       cursor: pointer;
-      transition: all 0.4s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      transition: all 0.3s ease;
       position: relative;
-      overflow: hidden;
     }
 
-    /* Efek glow putih lembut */
-    .card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 1rem;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      opacity: 0;
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.25),
-                  inset 0 0 15px rgba(255, 255, 255, 0.1);
-      transition: all 0.4s ease;
-      pointer-events: none;
-    }
-
-    .card:hover::before {
-      opacity: 1;
-    }
-
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow:
-        0 0 25px rgba(255, 255, 255, 0.15),
-        inset 0 0 10px rgba(255, 255, 255, 0.08);
-    }
-
-    .card-icon {
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
+    .btn-panel i {
+      font-size: 1.2rem;
       background: linear-gradient(90deg, #ffffff, #e5e5e5);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .card h3 {
+    .btn-panel:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Bagian teks pengaman */
+    .security-section {
+      margin-top: 3rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      animation: fadeInUp 1s ease;
+    }
+
+    .security-section i {
+      font-size: 1.8rem;
+      color: #00ffcc;
+      margin-top: 0.3rem;
+      text-shadow: 0 0 10px rgba(0,255,204,0.5);
+    }
+
+    .security-section div {
+      flex: 1;
+    }
+
+    .security-section h2 {
       font-size: 1.3rem;
-      margin-bottom: 1rem;
       color: #fff;
-      font-weight: 600;
+      margin-bottom: 0.5rem;
     }
 
-    .card p {
-      font-size: 0.9rem;
+    .security-section p {
+      font-size: 0.95rem;
       color: #bdbdbd;
-      line-height: 1.5;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      margin-top: 4rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      color: #aaa;
-    }
-
-    footer a {
-      color: #e5e5e5;
-      text-decoration: none;
-      position: relative;
-      transition: 0.3s;
-    }
-
-    footer a:hover {
-      color: #fff;
+      line-height: 1.6;
     }
 
     @keyframes fadeIn {
@@ -168,9 +162,14 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     @media (max-width: 768px) {
-      .header h1 { font-size: 2.2rem; }
-      .grid { grid-template-columns: 1fr; }
+      .header h1 { font-size: 2rem; }
+      .btn-panel { font-size: 0.95rem; padding: 1rem 1.4rem; }
     }
   </style>
 </head>
@@ -180,39 +179,34 @@
   <div class="container">
     <header class="header">
       <h1>パネル</h1>
-      <p>Mengelola server melalui web dengan efisien, sekaligus memastikan kinerjanya tetap optimal dan tahan lama.</p>
+      <p>Mengelola server secara efisien, aman, dan fleksibel dengan sistem berbasis kontrol penuh.</p>
     </header>
 
-    <div class="grid">
-      <div class="card" onclick="openLink('/buy/panel')">
-        <i class="fas fa-rocket card-icon"></i>
-        <h3>Beli Panel</h3>
-        <p>Dapatkan akses instan ke panel server berkinerja tinggi dengan keamanan tingkat perusahaan.</p>
-      </div>
-
-      <div class="card" onclick="openLink('/buy/admin')">
-        <i class="fas fa-shield-alt card-icon"></i>
-        <h3>Beli Admin</h3>
-        <p>Nikmati hak administratif penuh dengan autentikasi berlapis dan pencatatan aktivitas yang aman.</p>
-      </div>
-
-      <div class="card" onclick="openLink('/create/panel')">
-        <i class="fas fa-plus-circle card-icon"></i>
-        <h3>Buat Panel</h3>
-        <p>Bangun panel kontrol khusus sesuai kebutuhan dengan fitur modular yang fleksibel.</p>
-      </div>
-
-      <div class="card" onclick="openLink('/create/admin')">
-        <i class="fas fa-user-cog card-icon"></i>
-        <h3>Buat Admin</h3>
-        <p>Atur profil admin dengan kontrol izin yang lebih detail dan terpersonalisasi.</p>
-      </div>
+    <div class="button-row">
+      <button class="btn-panel" onclick="openLink('/buy/panel')">
+        <i class="fas fa-rocket"></i> Beli Panel
+      </button>
+      <button class="btn-panel" onclick="openLink('/buy/admin')">
+        <i class="fas fa-user-shield"></i> Beli Admin
+      </button>
+      <button class="btn-panel" onclick="openLink('/create/panel')">
+        <i class="fas fa-plus-circle"></i> Buat Panel
+      </button>
+      <button class="btn-panel" onclick="openLink('/create/admin')">
+        <i class="fas fa-user-cog"></i> Buat Admin
+      </button>
     </div>
 
-    <footer>
-      <p>&copy; 2025 Powered by <a href="https://t.me/IMWIRACODE" target="_blank">Wira Advanced</a></p>
-      <p style="margin-top: 0.5rem; font-size: 0.9em;">v4.2.1 | 安全な接続 🔒 | 24/7 サポート</p>
-    </footer>
+    <section class="security-section">
+      <i class="fas fa-lock"></i>
+      <div>
+        <h2>Keamanan Sistem</h2>
+        <p>
+          Semua koneksi dilindungi oleh enkripsi 256-bit dan sistem autentikasi berlapis.
+          Setiap aktivitas terekam secara real-time untuk menjaga integritas data dan mencegah penyalahgunaan.
+        </p>
+      </div>
+    </section>
   </div>
 
   <script>
@@ -234,29 +228,19 @@
       move: {
         enable: true,
         speed: 1.2,
-        direction: "none",
-        random: false,
-        straight: false,
-        out_mode: "out",
-        bounce: false
       }
     },
     interactivity: {
-      detect_on: "canvas",
       events: {
         onhover: { enable: true, mode: "repulse" },
-        onclick: { enable: true, mode: "push" },
-        resize: true
       },
       modes: {
         repulse: { distance: 100, duration: 0.4 },
-        push: { particles_nb: 4 }
       }
     },
     retina_detect: true
   });
 
-  // Fungsi klik
   function openLink(url) {
     window.location.href = url;
   }
