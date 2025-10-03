@@ -3,78 +3,186 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pilih Aksi</title>
-
+  <title>DasBotz - Server</title>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
     body {
+      min-height: 100vh;
       background: radial-gradient(circle at center, #000 70%, #1a1a1a 100%);
       color: #fff;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      overflow-x: hidden;
+      position: relative;
     }
 
-    /* Overlay popup */
-    .popup-overlay {
+    #particles-js {
       position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.6);
+      width: 100%; height: 100%;
+      z-index: 1;
+      background: transparent;
+      pointer-events: none;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* Header */
+    .header { text-align: left; margin-bottom: 2.5rem; animation: fadeIn 1s ease; }
+    .header .title-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem; }
+    .header i {
+      font-size: 2rem;
+      background: linear-gradient(90deg, #ffffff, #b0b0b0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .header h1 {
+      font-size: 2.8rem;
+      background: linear-gradient(90deg, #ffffff, #d1d5db);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700; letter-spacing: 2px;
+    }
+    .header p { font-size: 1rem; color: #c9c9c9; max-width: 600px; line-height: 1.6; }
+
+    /* Tombol Panel */
+    .button-row {
+      display: flex; gap: 1.2rem;
+      overflow-x: auto; scroll-behavior: smooth;
+      padding: 1rem 0 1.5rem;
+    }
+
+    .button-row::-webkit-scrollbar { height: 6px; }
+    .button-row::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.2); border-radius: 3px;
+    }
+
+    .btn-panel {
+      flex: 0 0 auto;
+      width: 260px;
+      text-align: left;
+      padding: 1.4rem 1.6rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(15,15,15,0.7);
       backdrop-filter: blur(10px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      animation: fadeIn 0.5s ease forwards;
-      z-index: 999;
+      box-shadow: 0 0 15px rgba(255,255,255,0.05);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 3;
     }
 
-    /* Kartu popup */
-    .popup-card {
-      background: rgba(20, 20, 20, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.05);
-      padding: 2rem 2.5rem;
-      border-radius: 1.2rem;
-      text-align: center;
-      max-width: 360px;
-      width: 90%;
-      transform: scale(0.9);
-      animation: popUp 0.5s ease forwards;
+    .btn-panel:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 20px rgba(255,255,255,0.25);
+      border-color: rgba(255,255,255,0.3);
     }
 
-    .popup-card h3 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      background: linear-gradient(90deg, #fff, #bfbfbf);
+    .btn-panel i, .btn-panel .btn-title, .btn-panel .btn-desc {
+      background: linear-gradient(90deg, #ffffff, #b0b0b0);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
+    .btn-panel i { font-size: 1.5rem; margin-bottom: 0.8rem; display: block; }
+    .btn-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .btn-desc { font-size: 0.9rem; line-height: 1.4; }
+
+    /* Keamanan */
+    .security-section {
+      margin-top: 3rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 1rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      animation: fadeInUp 1s ease;
+      position: relative; overflow: hidden;
+    }
+
+    .security-section::before {
+      content: "";
+      position: absolute; top: 0; left: -80%;
+      width: 60%; height: 100%;
+      background: linear-gradient(
+        120deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.05) 30%,
+        rgba(255,255,255,0.15) 50%,
+        rgba(255,255,255,0.05) 70%,
+        rgba(255,255,255,0) 100%
+      );
+      filter: blur(12px);
+      animation: shimmerFlow 6s linear infinite;
+      z-index: 1; opacity: 0.8;
+    }
+
+    @keyframes shimmerFlow { 0%{left:-80%;} 100%{left:120%;} }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+    @keyframes fadeInUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+
+    @media (max-width:768px) {
+      .header h1 { font-size: 2rem; }
+      .btn-panel { width: 220px; padding: 1.2rem; }
+      .btn-title { font-size: 1rem; }
+      .btn-desc { font-size: 0.85rem; }
+    }
+
+    /* 🌟 Popup Overlay */
+    .popup-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; visibility: hidden;
+      transition: all 0.4s ease;
+      z-index: 999;
+    }
+    .popup-overlay.show { opacity: 1; visibility: visible; }
+
+    .popup-card {
+      background: rgba(20,20,20,0.85);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 1rem;
+      padding: 2rem 2.2rem;
+      text-align: center;
+      width: 320px;
+      transform: scale(0.7);
+      opacity: 0;
+      animation: popupShow 0.4s ease forwards;
+    }
+
+    @keyframes popupShow {
+      0% { transform: scale(0.6) translateY(20px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .popup-card h3 {
+      font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;
+      background: linear-gradient(90deg, #fff, #bfbfbf);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
     .popup-desc {
-      font-size: 0.9rem;
-      color: #c9c9c9;
-      margin-bottom: 1.8rem;
-      line-height: 1.5;
+      font-size: 0.9rem; color: #c9c9c9; margin-bottom: 1.8rem; line-height: 1.5;
     }
 
     .popup-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
+      display: flex; justify-content: center; gap: 1rem;
     }
 
-    /* 🔹 Tombol utama */
+    /* Tombol popup */
     .popup-btn {
       background: linear-gradient(135deg, #ffffff, #dcdcdc);
       color: #111;
@@ -86,17 +194,25 @@
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.05);
+      box-shadow: 0 4px 15px rgba(255,255,255,0.05);
     }
 
-    /* Efek glowing di samping */
-    .popup-btn::before {
-      content: '';
+    /* ✨ Efek shimmer di tombol */
+    .popup-btn::after {
+      content: "";
       position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      border: 2px solid transparent;
-      transition: all 0.3s ease;
+      top: 0; left: -75%;
+      width: 50%; height: 100%;
+      background: linear-gradient(120deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.3) 100%);
+      transform: skewX(-25deg);
+      transition: all 0.5s ease;
+      opacity: 0;
+    }
+
+    .popup-btn:hover::after {
+      left: 125%;
+      opacity: 1;
+      transition: all 1s ease;
     }
 
     .popup-btn:hover {
@@ -108,52 +224,92 @@
       transform: scale(0.96);
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
     }
-
-    .popup-btn:active::before {
-      border-left-color: rgba(255, 255, 255, 0.6);
-      border-right-color: rgba(255, 255, 255, 0.6);
-      box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.4);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes popUp {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
-    }
   </style>
 </head>
 <body>
+  <div id="particles-js"></div>
 
+  <div class="container">
+    <header class="header">
+      <div class="title-row">
+        <i class="fas fa-gamepad"></i>
+        <h1>DasBotz</h1>
+      </div>
+      <p>Mengelola server secara efisien, aman, dan fleksibel dengan sistem berbasis kontrol penuh.</p>
+    </header>
+
+    <div class="button-row">
+      <div class="btn-panel"><i class="fas fa-user-cog"></i>
+        <div class="btn-title">Account</div>
+        <div class="btn-desc">Login ke akun anda dan dapatkan akses penuh ke akun bot anda.</div>
+      </div>
+
+      <div class="btn-panel"><i class="fas fa-robot"></i>
+        <div class="btn-title">Bot</div>
+        <div class="btn-desc">Menampilkan semua bot yg tersedia</div>
+      </div>
+
+      <div class="btn-panel"><i class="fas fa-bullhorn"></i>
+        <div class="btn-title">Announcement</div>
+        <div class="btn-desc">Menampilkan seluruh pengunguman terbaru</div> 
+      </div>
+
+      <div class="btn-panel"><i class="fas fa-headset"></i>
+        <div class="btn-title">Custom Service</div>
+        <div class="btn-desc">Dapatkan bantuan langsung dari tim dukungan kami.</div>
+      </div>
+    </div>
+
+    <section class="security-section">
+      <i class="fas fa-lock"></i>
+      <div>
+        <h2>Keamanan Sistem</h2>
+        <p>Semua koneksi dilindungi oleh enkripsi 256-bit dan sistem autentikasi berlapis. Setiap aktivitas terekam secara real-time untuk menjaga integritas data dan mencegah penyalahgunaan.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- 🌟 Popup -->
   <div class="popup-overlay" id="popup">
     <div class="popup-card">
       <h3>Pilih Aksi</h3>
-      <p class="popup-desc">
-        Pilih opsi <strong>Masuk</strong> atau <strong>Daftar</strong>.<br>
-        Jika sudah memiliki akun, silakan tekan <em>Masuk</em>.
-      </p>
+      <p class="popup-desc">Pilih opsi <strong>Masuk</strong> atau <strong>Daftar</strong>.<br>Jika sudah memiliki akun, silakan tekan <em>Masuk</em>.</p>
       <div class="popup-buttons">
-        <button class="popup-btn" id="btnMasuk"><i class="fas fa-sign-in-alt"></i> Masuk</button>
-        <button class="popup-btn" id="btnDaftar"><i class="fas fa-user-plus"></i> Daftar</button>
+        <button class="popup-btn"><i class="fas fa-sign-in-alt"></i> Masuk</button>
+        <button class="popup-btn"><i class="fas fa-user-plus"></i> Daftar</button>
       </div>
     </div>
   </div>
 
   <script>
-    const masukBtn = document.getElementById('btnMasuk');
-    const daftarBtn = document.getElementById('btnDaftar');
-
-    masukBtn.addEventListener('click', () => {
-      alert('Kamu memilih: Masuk');
+    // Particles.js
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 100 },
+        color: { value: '#ffffff' },
+        shape: { type: 'circle' },
+        opacity: { value: 0.8 },
+        size: { value: 2.5 },
+        line_linked: { enable: true, distance: 150, color: '#fff', opacity: 0.2, width: 1 },
+        move: { enable: true, speed: 1.2 }
+      },
+      interactivity: { events: { onhover: { enable: true, mode: "repulse" } }, modes: { repulse: { distance: 100, duration: 0.4 } } },
+      retina_detect: true
     });
 
-    daftarBtn.addEventListener('click', () => {
-      alert('Kamu memilih: Daftar');
+    // Popup trigger dari tombol Account
+    document.querySelectorAll('.btn-panel').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.querySelector('.btn-title').innerText === 'Account') {
+          document.getElementById('popup').classList.add('show');
+        }
+      });
+    });
+
+    // Tutup popup saat klik di luar card
+    document.getElementById('popup').addEventListener('click', (e) => {
+      if (e.target.id === 'popup') e.target.classList.remove('show');
     });
   </script>
-
 </body>
 </html>
