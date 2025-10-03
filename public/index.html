@@ -3,215 +3,287 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🎮 パネル</title>
+  <title>DasBotz - Server</title>
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
   <style>
-    body {
-      margin: 0;
-      padding: 0;
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
-      color: white;
-      background: radial-gradient(ellipse at bottom, #0a0a0a, #000);
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at center, #000 70%, #1a1a1a 100%);
+      color: #fff;
       overflow-x: hidden;
+      position: relative;
     }
 
     #particles-js {
       position: fixed;
       width: 100%;
       height: 100%;
-      z-index: -1;
+      z-index: 1;
+      background: transparent;
+      pointer-events: none;
     }
 
     .container {
-      text-align: left;
-      padding: 40px 20px;
+      position: relative;
+      z-index: 2;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
     }
 
-    /* Header */
-    .title {
+    /* 🔹 Header diperbaiki layout */
+    .header {
+      text-align: left;
+      margin-bottom: 2.5rem;
+      animation: fadeIn 1s ease;
+    }
+
+    .header .title-row {
       display: flex;
       align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .header i {
       font-size: 2rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-      background: linear-gradient(90deg, #fff, #aaa);
+      background: linear-gradient(90deg, #ffffff, #b0b0b0);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .title i {
-      margin-right: 10px;
-      font-size: 1.8rem;
-      color: #ccc;
+    .header h1 {
+      font-size: 2.8rem;
+      background: linear-gradient(90deg, #ffffff, #d1d5db);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+      letter-spacing: 2px;
     }
 
-    .subtitle {
+    .header p {
       font-size: 1rem;
-      color: #ccc;
+      color: #c9c9c9;
       max-width: 600px;
-      margin-bottom: 30px;
       line-height: 1.6;
     }
 
-    /* Button cards */
-    .scroll-buttons {
+    /* 🔹 Tombol panel */
+    .button-row {
       display: flex;
+      gap: 1.2rem;
       overflow-x: auto;
-      gap: 15px;
       scroll-behavior: smooth;
-      padding-bottom: 10px;
+      padding: 1rem 0 1.5rem;
     }
 
-    .card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
-      padding: 20px;
-      min-width: 230px;
+    .button-row::-webkit-scrollbar { height: 6px; }
+    .button-row::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.2);
+      border-radius: 3px;
+    }
+
+    .btn-panel {
       flex: 0 0 auto;
-      transition: all 0.3s ease;
+      width: 260px;
+      text-align: left;
+      padding: 1.4rem 1.6rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(15,15,15,0.7);
       backdrop-filter: blur(10px);
+      box-shadow: 0 0 15px rgba(255,255,255,0.05);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 3;
     }
 
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 4px 20px rgba(255,255,255,0.15);
+    .btn-panel:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 20px rgba(255,255,255,0.25);
+      border-color: rgba(255,255,255,0.3);
     }
 
-    .card i {
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-      background: linear-gradient(135deg, #fff, #999);
+    .btn-panel i,
+    .btn-panel .btn-title,
+    .btn-panel .btn-desc {
+      background: linear-gradient(90deg, #ffffff, #b0b0b0);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .card h3 {
-      margin: 0;
-      font-size: 1.2rem;
-      background: linear-gradient(90deg, #fff, #aaa);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .btn-panel i {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+      display: block;
     }
 
-    .card p {
-      margin-top: 8px;
+    .btn-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .btn-desc {
       font-size: 0.9rem;
-      color: #bbb;
+      line-height: 1.4;
     }
 
-    /* Card Keamanan */
-    .security-card {
+    /* 🌟 Card Keamanan */
+    .security-section {
+      margin-top: 3rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 1rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      animation: fadeInUp 1s ease;
       position: relative;
       overflow: hidden;
-      margin-top: 30px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 20px;
-      padding: 25px;
-      backdrop-filter: blur(12px);
     }
 
-    .security-card::before {
+    .security-section i {
+      font-size: 1.8rem;
+      background: linear-gradient(90deg, #ffffff, #b0b0b0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-top: 0.3rem;
+      text-shadow: 0 0 10px rgba(255,255,255,0.2);
+      z-index: 2;
+    }
+
+    .security-section div {
+      flex: 1;
+      position: relative;
+      z-index: 2;
+    }
+
+    .security-section h2 {
+      font-size: 1.3rem;
+      background: linear-gradient(90deg, #ffffff, #b0b0b0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .security-section p {
+      font-size: 0.95rem;
+      color: #bdbdbd;
+      line-height: 1.6;
+    }
+
+    /* ✨ Efek shimmer lembut */
+    .security-section::before {
       content: "";
       position: absolute;
       top: 0;
-      left: -75%;
-      width: 50%;
+      left: -80%;
+      width: 60%;
       height: 100%;
-      background: linear-gradient(120deg, rgba(255,255,255,0.2), transparent 70%);
-      transform: skewX(-25deg);
-      animation: shimmer 4s linear infinite;
-      filter: blur(8px);
+      background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.05) 30%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.05) 70%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      filter: blur(12px);
+      animation: shimmerFlow 6s linear infinite;
+      z-index: 1;
+      opacity: 0.8;
     }
 
-    @keyframes shimmer {
-      0% { left: -75%; }
-      100% { left: 125%; }
+    @keyframes shimmerFlow {
+      0% { left: -80%; }
+      100% { left: 120%; }
     }
 
-    .security-card i {
-      font-size: 2rem;
-      margin-right: 10px;
-      background: linear-gradient(90deg, #fff, #999);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .security-card h3 {
-      display: flex;
-      align-items: center;
-      font-size: 1.3rem;
-      margin-bottom: 10px;
-      background: linear-gradient(90deg, #fff, #aaa);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .security-card p {
-      color: #bbb;
-      font-size: 0.9rem;
-      line-height: 1.6;
+    @media (max-width: 768px) {
+      .header h1 { font-size: 2rem; }
+      .btn-panel { width: 220px; padding: 1.2rem; }
+      .btn-title { font-size: 1rem; }
+      .btn-desc { font-size: 0.85rem; }
     }
-
   </style>
 </head>
 <body>
   <div id="particles-js"></div>
 
   <div class="container">
-    <div class="title"><i>🎮</i> パネル</div>
-    <p class="subtitle">Mengelola server secara efisien, aman, dan fleksibel dengan sistem berbasis kontrol penuh.</p>
+    <header class="header">
+      <div class="title-row">
+        <i class="fas fa-gamepad"></i>
+        <h1>パネル</h1>
+      </div>
+      <p>Mengelola server secara efisien, aman, dan fleksibel dengan sistem berbasis kontrol penuh.</p>
+    </header>
 
-    <div class="scroll-buttons">
-      <div class="card">
-        <i>🚀</i>
-        <h3>Beli Panel</h3>
-        <p>Dapatkan akses penuh ke panel server premium.</p>
+    <div class="button-row">
+      <div class="btn-panel"><i class="fas fa-rocket"></i>
+        <div class="btn-title">Beli Panel</div>
+        <div class="btn-desc">Dapatkan akses penuh ke panel server premium.</div>
       </div>
 
-      <div class="card">
-        <i>🛡️</i>
-        <h3>Beli Admin</h3>
-        <p>Tingkatkan status menjadi admin terpercaya.</p>
+      <div class="btn-panel"><i class="fas fa-user-shield"></i>
+        <div class="btn-title">Beli Admin</div>
+        <div class="btn-desc">Tingkatkan status anda menjadi admin terpercaya.</div>
       </div>
 
-      <div class="card">
-        <i>⚙️</i>
-        <h3>Pengaturan</h3>
-        <p>Atur konfigurasi dan preferensi sistem anda.</p>
+      <div class="btn-panel"><i class="fas fa-plus-circle"></i>
+        <div class="btn-title">Buat Panel</div>
+        <div class="btn-desc">Buat panel baru untuk kebutuhan server Anda sendiri.</div>
       </div>
 
-      <div class="card">
-        <i>💬</i>
-        <h3>Dukungan</h3>
-        <p>Dapatkan bantuan langsung dari tim support kami.</p>
+      <div class="btn-panel"><i class="fas fa-user-cog"></i>
+        <div class="btn-title">Buat Admin</div>
+        <div class="btn-desc">Tambahkan akun admin baru dengan hak akses khusus.</div>
       </div>
     </div>
 
-    <div class="security-card">
-      <h3><i>🔒</i> Keamanan Sistem</h3>
-      <p>
-        Semua koneksi dilindungi oleh enkripsi 256-bit dan sistem autentikasi berlapis.
-        Setiap aktivitas terekam secara real-time untuk menjaga integritas data dan mencegah penyalahgunaan.
-      </p>
-    </div>
+    <section class="security-section">
+      <i class="fas fa-lock"></i>
+      <div>
+        <h2>Keamanan Sistem</h2>
+        <p>Semua koneksi dilindungi oleh enkripsi 256-bit dan sistem autentikasi berlapis. Setiap aktivitas terekam secara real-time untuk menjaga integritas data dan mencegah penyalahgunaan.</p>
+      </div>
+    </section>
   </div>
 
   <script>
-    particlesJS("particles-js", {
-      "particles": {
-        "number": { "value": 80 },
-        "size": { "value": 2 },
-        "color": { "value": "#ffffff" },
-        "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.2 },
-        "move": { "enable": true, "speed": 1 }
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 100 },
+        color: { value: '#ffffff' },
+        shape: { type: 'circle' },
+        opacity: { value: 0.8 },
+        size: { value: 2.5 },
+        line_linked: { enable: true, distance: 150, color: '#fff', opacity: 0.2, width: 1 },
+        move: { enable: true, speed: 1.2 }
       },
-      "interactivity": {
-        "events": { "onhover": { "enable": false } }
-      }
+      interactivity: { events: { onhover: { enable: true, mode: "repulse" } }, modes: { repulse: { distance: 100, duration: 0.4 } } },
+      retina_detect: true
     });
   </script>
 </body>
