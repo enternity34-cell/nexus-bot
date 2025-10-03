@@ -13,12 +13,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
     body {
       min-height: 100vh;
@@ -40,7 +35,7 @@
       pointer-events: none;
     }
 
-    /*  Kotak Login */
+    /* Kotak Login */
     .container {
       background: rgba(15, 15, 15, 0.75);
       backdrop-filter: blur(12px);
@@ -72,10 +67,7 @@
       letter-spacing: 1px;
     }
 
-    .form-group {
-      margin-bottom: 1.4rem;
-    }
-
+    .form-group { margin-bottom: 1.4rem; }
     label {
       display: block;
       margin-bottom: 0.4rem;
@@ -83,10 +75,7 @@
       font-size: 0.9rem;
       font-weight: 500;
     }
-
-    label i {
-      margin-right: 6px;
-    }
+    label i { margin-right: 6px; }
 
     input {
       width: 100%;
@@ -99,14 +88,13 @@
       outline: none;
       transition: all 0.3s ease;
     }
-
     input:focus {
       border-color: rgba(255, 255, 255, 0.35);
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
       background: rgba(255, 255, 255, 0.08);
     }
 
-    /*  Tombol Login dengan Efek Cahaya Melintas */
+    /* Tombol Login */
     button {
       width: 100%;
       padding: 0.9rem;
@@ -120,11 +108,11 @@
       position: relative;
       overflow: hidden;
       transition: all 0.3s ease;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05),
-                  inset 0 0 8px rgba(255,255,255,0.2);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05), inset 0 0 8px rgba(255,255,255,0.2);
+      margin-bottom: 1rem;
     }
 
-    /*  Cahaya melintas */
+    /* Cahaya melintas */
     button::after {
       content: "";
       position: absolute;
@@ -156,7 +144,23 @@
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
     }
 
-    /*  Popup */
+    /* Tombol tambahan */
+    .extra-links {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+    }
+    .extra-links a {
+      color: #c9c9c9;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .extra-links a:hover {
+      color: #ffffff;
+    }
+
+    /* Popup */
     .popup {
       position: fixed;
       top: 30px;
@@ -174,33 +178,12 @@
       align-items: center;
       gap: 10px;
     }
+    .popup.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .popup.success { background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.4); color: #bbf7d0; }
+    .popup.error { background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: #fecaca; }
+    .popup i { font-size: 1.1rem; }
 
-    .popup.show {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
-    }
-
-    .popup.success {
-      background: rgba(34, 197, 94, 0.15);
-      border: 1px solid rgba(34, 197, 94, 0.4);
-      color: #bbf7d0;
-    }
-
-    .popup.error {
-      background: rgba(239, 68, 68, 0.15);
-      border: 1px solid rgba(239, 68, 68, 0.4);
-      color: #fecaca;
-    }
-
-    .popup i {
-      font-size: 1.1rem;
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
@@ -220,6 +203,11 @@
     </div>
 
     <button id="loginBtn">Masuk</button>
+
+    <div class="extra-links">
+      <a href="/register"><i class="fas fa-user-plus"></i> Daftar</a>
+      <a href="/forgot-password"><i class="fas fa-key"></i> Lupa Password?</a>
+    </div>
   </div>
 
   <div id="popup" class="popup">
