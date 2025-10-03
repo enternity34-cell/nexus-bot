@@ -4,7 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DasBotz - Server</title>
+
+  <!-- Particles.js -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+  <!-- Font & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
@@ -24,6 +28,7 @@
       width: 100%;
       height: 100%;
       z-index: 1;
+      background: transparent;
       pointer-events: none;
     }
 
@@ -35,6 +40,7 @@
       padding: 2rem;
     }
 
+    /* Header */
     .header {
       text-align: left;
       margin-bottom: 2.5rem;
@@ -71,13 +77,19 @@
       line-height: 1.6;
     }
 
-    /* BUTTON PANEL */
+    /* Button Row */
     .button-row {
       display: flex;
       gap: 1.2rem;
       overflow-x: auto;
       scroll-behavior: smooth;
       padding: 1rem 0 1.5rem;
+    }
+
+    .button-row::-webkit-scrollbar { height: 6px; }
+    .button-row::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.2);
+      border-radius: 3px;
     }
 
     .btn-panel {
@@ -92,6 +104,8 @@
       box-shadow: 0 0 15px rgba(255,255,255,0.05);
       cursor: pointer;
       transition: all 0.3s ease;
+      position: relative;
+      z-index: 3;
     }
 
     .btn-panel:hover {
@@ -114,10 +128,18 @@
       display: block;
     }
 
-    .btn-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.4rem; }
-    .btn-desc { font-size: 0.9rem; line-height: 1.4; }
+    .btn-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
 
-    /* SECURITY */
+    .btn-desc {
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    /* Security Section */
     .security-section {
       margin-top: 3rem;
       background: rgba(255, 255, 255, 0.03);
@@ -130,6 +152,22 @@
       animation: fadeInUp 1s ease;
       position: relative;
       overflow: hidden;
+    }
+
+    .security-section i {
+      font-size: 1.8rem;
+      background: linear-gradient(90deg, #ffffff, #b0b0b0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-top: 0.3rem;
+      text-shadow: 0 0 10px rgba(255,255,255,0.2);
+      z-index: 2;
+    }
+
+    .security-section div {
+      flex: 1;
+      position: relative;
+      z-index: 2;
     }
 
     .security-section h2 {
@@ -146,85 +184,126 @@
       line-height: 1.6;
     }
 
-    /* 🔹 POPUP */
-    .popup-overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(10px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 10;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
+    .security-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -80%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.05) 30%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.05) 70%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      filter: blur(12px);
+      animation: shimmerFlow 6s linear infinite;
+      z-index: 1;
+      opacity: 0.8;
     }
 
-    .popup-overlay.active {
-      opacity: 1;
-      pointer-events: all;
+    @keyframes shimmerFlow {
+      0% { left: -80%; }
+      100% { left: 120%; }
     }
 
-    .popup-card {
-      background: rgba(25,25,25,0.85);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 1rem;
-      padding: 2rem 2.5rem;
-      text-align: center;
-      width: 340px;
-      color: #fff;
-      transform: scale(0.85) translateY(30px);
-      opacity: 0;
-      box-shadow: 0 0 25px rgba(255,255,255,0.05);
-      animation: popupShow 0.4s ease forwards;
-    }
-
-    @keyframes popupShow {
-      to {
-        transform: scale(1) translateY(0);
-        opacity: 1;
-      }
-    }
-
-    .popup-card h3 {
-      font-size: 1.4rem;
-      font-weight: 600;
-      margin-bottom: 1.6rem;
-      background: linear-gradient(90deg, #fff, #b0b0b0);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .popup-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-    }
-
-    .popup-btn {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      padding: 0.6rem 1.5rem;
-      border-radius: 0.6rem;
-      color: #fff;
-      cursor: pointer;
-      font-weight: 500;
-      transition: all 0.25s ease;
-    }
-
-    .popup-btn:hover {
-      background: rgba(255,255,255,0.2);
-      transform: translateY(-2px);
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* 🌟 Popup Overlay */
+    .popup-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+      z-index: 999;
+    }
+
+    .popup-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .popup-card {
+      background: rgba(15,15,15,0.85);
+      border-radius: 1rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 2rem 2.2rem;
+      text-align: center;
+      width: 320px;
+      transform: scale(0.7);
+      opacity: 0;
+      animation: popupShow 0.4s ease forwards;
+    }
+
+    @keyframes popupShow {
+      0% { transform: scale(0.6) translateY(20px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .popup-card h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      background: linear-gradient(90deg, #fff, #b0b0b0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .popup-desc {
+      font-size: 0.9rem;
+      color: #c9c9c9;
+      line-height: 1.5;
+      margin-bottom: 1.6rem;
+    }
+
+    .popup-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .popup-btn {
+      padding: 0.6rem 1.2rem;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 0.6rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .popup-btn:hover {
+      background: rgba(255,255,255,0.25);
+      border-color: rgba(255,255,255,0.3);
+    }
+
+    @media (max-width: 768px) {
+      .header h1 { font-size: 2rem; }
+      .btn-panel { width: 220px; padding: 1.2rem; }
+      .btn-title { font-size: 1rem; }
+      .btn-desc { font-size: 0.85rem; }
+    }
   </style>
 </head>
+
 <body>
   <div id="particles-js"></div>
 
@@ -238,24 +317,27 @@
     </header>
 
     <div class="button-row">
-      <div class="btn-panel" id="accountBtn">
+      <div class="btn-panel">
         <i class="fas fa-user-cog"></i>
         <div class="btn-title">Account</div>
         <div class="btn-desc">Login ke akun anda dan dapatkan akses penuh ke akun bot anda.</div>
       </div>
 
-      <div class="btn-panel"><i class="fas fa-robot"></i>
+      <div class="btn-panel">
+        <i class="fas fa-robot"></i>
         <div class="btn-title">Bot</div>
         <div class="btn-desc">Menampilkan semua bot yg tersedia</div>
       </div>
 
-      <div class="btn-panel"><i class="fas fa-bullhorn"></i>
+      <div class="btn-panel">
+        <i class="fas fa-bullhorn"></i>
         <div class="btn-title">Announcement</div>
-        <div class="btn-desc">Menampilkan seluruh pengumuman terbaru</div>
+        <div class="btn-desc">Menampilkan seluruh pengunguman terbaru</div>
       </div>
 
-      <div class="btn-panel"><i class="fas fa-headset"></i>
-        <div class="btn-title">Customer Service</div>
+      <div class="btn-panel">
+        <i class="fas fa-headset"></i>
+        <div class="btn-title">Custom Service</div>
         <div class="btn-desc">Dapatkan bantuan langsung dari tim dukungan kami.</div>
       </div>
     </div>
@@ -264,7 +346,7 @@
       <i class="fas fa-lock"></i>
       <div>
         <h2>Keamanan Sistem</h2>
-        <p>Semua koneksi dilindungi oleh enkripsi 256-bit dan sistem autentikasi berlapis. Setiap aktivitas terekam secara real-time.</p>
+        <p>Semua koneksi dilindungi oleh enkripsi 256-bit dan sistem autentikasi berlapis. Setiap aktivitas terekam secara real-time untuk menjaga integritas data dan mencegah penyalahgunaan.</p>
       </div>
     </section>
   </div>
@@ -273,6 +355,10 @@
   <div class="popup-overlay" id="popup">
     <div class="popup-card" id="popupCard">
       <h3>Pilih Aksi</h3>
+      <p class="popup-desc">
+        Pilih opsi <strong>Masuk</strong> atau <strong>Daftar</strong>.<br>
+        Jika sudah memiliki akun, silakan tekan <em>Masuk</em>.
+      </p>
       <div class="popup-buttons">
         <div class="popup-btn">Masuk</div>
         <div class="popup-btn">Daftar</div>
@@ -295,15 +381,18 @@
       retina_detect: true
     });
 
-    const accountBtn = document.getElementById('accountBtn');
-    const popup = document.getElementById('popup');
-
-    accountBtn.addEventListener('click', () => {
-      popup.classList.add('active');
+    // 🌟 Popup Trigger
+    document.querySelectorAll('.btn-panel').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.querySelector('.btn-title').innerText === 'Account') {
+          document.getElementById('popup').classList.add('show');
+        }
+      });
     });
 
-    popup.addEventListener('click', e => {
-      if (e.target === popup) popup.classList.remove('active');
+    // Tutup popup saat klik luar card
+    document.getElementById('popup').addEventListener('click', (e) => {
+      if (e.target.id === 'popup') e.target.classList.remove('show');
     });
   </script>
 </body>
