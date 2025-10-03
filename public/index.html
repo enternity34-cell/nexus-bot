@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DasBotz - Server</title>
-
+  <title>DasBotz - Panel</title>
+  
   <!-- Particles.js -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
@@ -13,11 +13,17 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
 
     body {
       min-height: 100vh;
       background: radial-gradient(circle at center, #000 70%, #1a1a1a 100%);
+      background-blend-mode: overlay;
       color: #fff;
       overflow-x: hidden;
       position: relative;
@@ -45,22 +51,34 @@
       text-align: left;
       margin-bottom: 2.5rem;
       animation: fadeIn 1s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
     }
 
     .header h1 {
-      font-size: 2.8rem;
+      font-size: 2.6rem;
       background: linear-gradient(90deg, #ffffff, #d1d5db);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       font-weight: 700;
       letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .header h1 i {
+      font-size: 2.2rem;
+      color: #fff;
+      filter: drop-shadow(0 0 6px rgba(255,255,255,0.3));
     }
 
     .header p {
       font-size: 1rem;
       color: #c9c9c9;
       max-width: 600px;
-      margin-top: 0.5rem;
+      margin-top: 0.4rem;
       line-height: 1.6;
     }
 
@@ -69,7 +87,7 @@
       display: flex;
       gap: 1.2rem;
       overflow-x: auto;
-      padding-bottom: 1rem;
+      padding: 0.8rem 0 1rem; /* memberi ruang atas agar tidak kepotong */
       scroll-behavior: smooth;
     }
 
@@ -82,12 +100,11 @@
       border-radius: 3px;
     }
 
-    /* Tombol Panel Deskriptif */
+    /* Tombol Card Futuristik */
     .btn-panel {
       flex: 0 0 auto;
-      width: 260px;
-      text-align: left;
-      padding: 1.4rem 1.6rem;
+      min-width: 240px;
+      padding: 1.2rem 1.5rem;
       border-radius: 1rem;
       border: 1px solid rgba(255, 255, 255, 0.15);
       background: rgba(15, 15, 15, 0.7);
@@ -95,33 +112,44 @@
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
       color: #fff;
       cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
       transition: all 0.3s ease;
-      position: relative;
-    }
-
-    .btn-panel:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-      border-color: rgba(255, 255, 255, 0.3);
+      flex-direction: row;
+      text-align: left;
     }
 
     .btn-panel i {
-      font-size: 1.5rem;
-      margin-bottom: 0.8rem;
-      display: block;
+      font-size: 1.6rem;
+      background: linear-gradient(90deg, #ffffff, #e5e5e5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-top: 0.2rem;
+    }
+
+    .btn-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .btn-text h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
       color: #fff;
     }
 
-    .btn-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 0.4rem;
+    .btn-text p {
+      font-size: 0.9rem;
+      color: #c5c5c5;
+      line-height: 1.4;
     }
 
-    .btn-desc {
-      font-size: 0.9rem;
-      color: #cfcfcf;
-      line-height: 1.4;
+    .btn-panel:hover {
+      transform: translateY(-3px); /* halus naik tapi tidak kepotong */
+      box-shadow: 0 0 18px rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.3);
     }
 
     /* Bagian teks pengaman */
@@ -139,9 +167,11 @@
 
     .security-section i {
       font-size: 1.8rem;
-      color: #00ffcc;
+      background: linear-gradient(135deg, #ffffff, #cfcfcf);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 8px rgba(255,255,255,0.3);
       margin-top: 0.3rem;
-      text-shadow: 0 0 10px rgba(0,255,204,0.5);
     }
 
     .security-section div {
@@ -172,9 +202,7 @@
 
     @media (max-width: 768px) {
       .header h1 { font-size: 2rem; }
-      .btn-panel { width: 220px; padding: 1.2rem; }
-      .btn-title { font-size: 1rem; }
-      .btn-desc { font-size: 0.85rem; }
+      .btn-panel { min-width: 200px; padding: 1rem 1.2rem; }
     }
   </style>
 </head>
@@ -183,34 +211,42 @@
 
   <div class="container">
     <header class="header">
-      <h1>パネル</h1>
-      <p>Mengelola server secara efisien, aman, dan fleksibel dengan sistem berbasis kontrol penuh.</p>
+      <h1><i class="fas fa-gamepad"></i> パネル</h1>
+      <p>Kelola sistem dan konfigurasi server anda dengan kontrol penuh dan desain modern futuristik.</p>
     </header>
 
     <div class="button-row">
-      <div class="btn-panel" onclick="openLink('/buy/panel')">
-        <i class="fas fa-rocket"></i>
-        <div class="btn-title">Beli Panel</div>
-        <div class="btn-desc">Dapatkan akses penuh ke panel server premium.</div>
-      </div>
-
-      <div class="btn-panel" onclick="openLink('/buy/admin')">
-        <i class="fas fa-user-shield"></i>
-        <div class="btn-title">Beli Admin</div>
-        <div class="btn-desc">Tingkatkan status anda menjadi admin terpercaya.</div>
-      </div>
-
-      <div class="btn-panel" onclick="openLink('/create/panel')">
-        <i class="fas fa-plus-circle"></i>
-        <div class="btn-title">Buat Panel</div>
-        <div class="btn-desc">Buat panel baru untuk kebutuhan server Anda sendiri.</div>
-      </div>
-
-      <div class="btn-panel" onclick="openLink('/create/admin')">
+      <button class="btn-panel" onclick="openLink('#')">
         <i class="fas fa-user-cog"></i>
-        <div class="btn-title">Buat Admin</div>
-        <div class="btn-desc">Tambahkan akun admin baru dengan hak akses khusus.</div>
-      </div>
+        <div class="btn-text">
+          <h3>AKUN</h3>
+          <p>Atur pengaturan akun bot Anda di sini.</p>
+        </div>
+      </button>
+
+      <button class="btn-panel" onclick="openLink('#')">
+        <i class="fas fa-server"></i>
+        <div class="btn-text">
+          <h3>SERVER</h3>
+          <p>Kelola dan pantau performa server real-time.</p>
+        </div>
+      </button>
+
+      <button class="btn-panel" onclick="openLink('#')">
+        <i class="fas fa-user-shield"></i>
+        <div class="btn-text">
+          <h3>ADMIN</h3>
+          <p>Atur izin dan kontrol penuh terhadap pengguna admin.</p>
+        </div>
+      </button>
+
+      <button class="btn-panel" onclick="openLink('#')">
+        <i class="fas fa-desktop"></i>
+        <div class="btn-text">
+          <h3>MONITOR</h3>
+          <p>Pantau aktivitas sistem dan status bot Anda.</p>
+        </div>
+      </button>
     </div>
 
     <section class="security-section">
@@ -218,8 +254,8 @@
       <div>
         <h2>Keamanan Sistem</h2>
         <p>
-          Semua koneksi dilindungi oleh enkripsi 256-bit dan sistem autentikasi berlapis.
-          Setiap aktivitas terekam secara real-time untuk menjaga integritas data dan mencegah penyalahgunaan.
+          Semua data dan konfigurasi Anda dilindungi oleh sistem enkripsi berlapis
+          dan pengawasan real-time untuk mencegah akses tidak sah.
         </p>
       </div>
     </section>
@@ -241,10 +277,7 @@
         opacity: 0.2,
         width: 1,
       },
-      move: {
-        enable: true,
-        speed: 1.2,
-      }
+      move: { enable: true, speed: 1.2 }
     },
     interactivity: {
       events: { onhover: { enable: true, mode: "repulse" } },
