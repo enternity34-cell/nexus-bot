@@ -66,42 +66,44 @@
     @keyframes fadeInUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
 
     /* Popup Customer Service */
-    .cs-popup {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: rgba(15,15,15,0.95);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 1rem;
-      padding: 1rem 1.5rem;
-      min-width: 220px;
-      z-index: 9999;
-      display: none;
-      flex-direction: column;
-      gap: 0.8rem;
-      box-shadow: 0 0 20px rgba(255,255,255,0.25);
-      animation: fadeInUp 0.5s ease;
-    }
-    .cs-popup a {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      text-decoration: none;
-      color: #fff;
-      padding: 0.5rem;
-      border-radius: 0.6rem;
-      transition: all 0.2s ease;
-    }
-    .cs-popup a:hover { background: rgba(255,255,255,0.1); }
+    <!-- Popup Customer Service -->
+<div class="cs-popup" id="csPopup">
+  <a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+  <a href="https://t.me/username" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
+  <a href="https://discord.com/users/username" target="_blank"><i class="fab fa-discord"></i> Discord</a>
+  <a href="mailto:support@example.com"><i class="fas fa-envelope"></i> Gmail</a>
+</div>
 
-    @media (max-width:768px) {
-      .header h1 { font-size: 2rem; }
-      .btn-panel { width: 220px; padding: 1.2rem; }
-      .btn-title { font-size: 1rem; }
-      .btn-desc { font-size: 0.85rem; }
-      .cs-popup { bottom: 15px; right: 15px; min-width: 200px; }
-    }
-  </style>
+<style>
+.cs-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(15,15,15,0.95);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 1rem;
+  padding: 1.5rem 2rem;
+  min-width: 250px;
+  z-index: 9999;
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 0 30px rgba(255,255,255,0.25);
+  animation: fadeInUp 0.5s ease;
+}
+.cs-popup a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: #fff;
+  padding: 0.6rem;
+  border-radius: 0.6rem;
+  transition: all 0.2s ease;
+}
+.cs-popup a:hover { background: rgba(255,255,255,0.1); }
+</style>
 </head>
 <body>
   <div id="particles-js"></div>
