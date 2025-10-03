@@ -3,247 +3,132 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>パネル - Control Server</title>
-  
-  <!-- Particles.js -->
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
-  <!-- Font & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
+  <title>🎮 パネル</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
     body {
-      min-height: 100vh;
-      background: radial-gradient(circle at center, #000 70%, #1a1a1a 100%);
-      color: #fff;
+      margin: 0;
+      padding: 20px;
+      font-family: "Poppins", sans-serif;
+      background: radial-gradient(circle at top left, #0a0a0a, #1a1a1a);
+      color: white;
+      backdrop-filter: blur(10px);
       overflow-x: hidden;
-      position: relative;
     }
 
-    /* Partikel putih */
-    #particles-js {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      background: transparent;
-      pointer-events: none;
-    }
-
-    .container {
-      position: relative;
-      z-index: 2;
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    .header {
-      text-align: left;
-      margin-bottom: 2.5rem;
-      animation: fadeIn 1s ease;
-    }
-
-    .header h1 {
-      font-size: 2.8rem;
-      background: linear-gradient(90deg, #ffffff, #d1d5db);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 700;
-      letter-spacing: 2px;
-    }
-
-    .header p {
-      font-size: 1rem;
-      color: #c9c9c9;
-      max-width: 600px;
-      margin-top: 0.5rem;
-      line-height: 1.6;
-    }
-
-    /* Scrollable Button Row */
-    .button-row {
+    h1 {
       display: flex;
-      gap: 1.5rem;
+      align-items: center;
+      font-size: 2rem;
+      gap: 10px;
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+      margin-bottom: 20px;
+    }
+
+    .scroll-container {
+      display: flex;
+      gap: 16px;
       overflow-x: auto;
-      padding-bottom: 1rem;
+      padding-bottom: 10px;
       scroll-behavior: smooth;
     }
 
-    .button-row::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    .button-row::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 3px;
-    }
-
-    /* Tombol besar futuristik */
-    .btn-panel {
-      flex: 0 0 auto;
-      padding: 1.6rem 2.6rem;
-      border-radius: 1rem;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      background: rgba(15, 15, 15, 0.7);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.06);
-      color: #fff;
-      font-weight: 600;
-      font-size: 1.1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    .btn-panel i {
-      font-size: 1.4rem;
-      background: linear-gradient(90deg, #ffffff, #d1d5db);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .btn-panel:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.25);
-      border-color: rgba(255, 255, 255, 0.3);
-    }
-
-    /* Bagian teks pengaman */
-    .security-section {
-      margin-top: 3rem;
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 1rem;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 1.8rem 2rem;
+    .card {
       display: flex;
       align-items: flex-start;
-      gap: 1.2rem;
-      animation: fadeInUp 1s ease;
+      gap: 12px;
+      min-width: 220px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 16px;
+      backdrop-filter: blur(8px);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      flex-shrink: 0;
     }
 
-    /* Gembok gradiasi putih-abu */
-    .security-section i {
-      font-size: 2.2rem;
-      background: linear-gradient(135deg, #ffffff, #b0b0b0);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
-      margin-top: 0.2rem;
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
     }
 
-    .security-section div {
-      flex: 1;
+    .card-icon {
+      font-size: 1.8rem;
+      color: white;
     }
 
-    .security-section h2 {
-      font-size: 1.4rem;
-      color: #fff;
-      margin-bottom: 0.5rem;
+    .card-text h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 600;
     }
 
-    .security-section p {
-      font-size: 1rem;
-      color: #bdbdbd;
-      line-height: 1.7;
+    .card-text p {
+      margin: 4px 0 0;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.7);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .security {
+      margin-top: 25px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.85);
     }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 768px) {
-      .header h1 { font-size: 2.2rem; }
-      .btn-panel {
-        padding: 1.4rem 2rem;
-        font-size: 1rem;
-      }
+    .security-icon {
+      width: 18px;
+      height: 18px;
+      background: linear-gradient(135deg, white, #ccc);
+      -webkit-mask: url('https://cdn-icons-png.flaticon.com/512/3064/3064197.png') no-repeat center;
+      -webkit-mask-size: contain;
+      mask: url('https://cdn-icons-png.flaticon.com/512/3064/3064197.png') no-repeat center;
+      mask-size: contain;
     }
   </style>
 </head>
 <body>
-  <div id="particles-js"></div>
+  <h1>🎮 パネル</h1>
 
-  <div class="container">
-    <header class="header">
-      <h1>パネル</h1>
-      <p>Mengelola server secara efisien, aman, dan fleksibel dengan sistem berbasis kontrol penuh.</p>
-    </header>
-
-    <!-- Tombol scrollable -->
-    <div class="button-row">
-      <button class="btn-panel" onclick="openLink('/buy/panel')">
-        <i class="fas fa-rocket"></i> Beli Panel
-      </button>
-      <button class="btn-panel" onclick="openLink('/buy/admin')">
-        <i class="fas fa-user-shield"></i> Beli Admin
-      </button>
-      <button class="btn-panel" onclick="openLink('/create/panel')">
-        <i class="fas fa-plus-circle"></i> Buat Panel
-      </button>
-      <button class="btn-panel" onclick="openLink('/create/admin')">
-        <i class="fas fa-user-cog"></i> Buat Admin
-      </button>
+  <div class="scroll-container">
+    <div class="card">
+      <div class="card-icon">👤</div>
+      <div class="card-text">
+        <h3>AKUN</h3>
+        <p>Atur pengaturan akun bot anda di sini!</p>
+      </div>
     </div>
 
-    <!-- Bagian pengaman -->
-    <section class="security-section">
-      <i class="fas fa-lock"></i>
-      <div>
-        <h2>Keamanan Sistem</h2>
-        <p>
-          Semua koneksi dilindungi oleh enkripsi 256-bit dan sistem autentikasi berlapis.
-          Setiap aktivitas dicatat secara real-time untuk memastikan integritas sistem dan mencegah penyalahgunaan.
-        </p>
+    <div class="card">
+      <div class="card-icon">⚙️</div>
+      <div class="card-text">
+        <h3>SERVER</h3>
+        <p>Kelola dan pantau performa server real-time!</p>
       </div>
-    </section>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🛡️</div>
+      <div class="card-text">
+        <h3>ADMIN</h3>
+        <p>Atur izin dan kontrol penuh pengguna admin!</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <div class="card-text">
+        <h3>MONITOR</h3>
+        <p>Pantau aktivitas sistem dan status bot Anda!</p>
+      </div>
+    </div>
   </div>
 
-  <script>
-  // Efek Partikel Putih
-  particlesJS('particles-js', {
-    particles: {
-      number: { value: 100 },
-      color: { value: '#ffffff' },
-      shape: { type: 'circle' },
-      opacity: { value: 0.8 },
-      size: { value: 2.5 },
-      line_linked: {
-        enable: true,
-        distance: 150,
-        color: '#ffffff',
-        opacity: 0.2,
-        width: 1,
-      },
-      move: { enable: true, speed: 1.2 }
-    },
-    interactivity: {
-      events: { onhover: { enable: true, mode: "repulse" } },
-      modes: { repulse: { distance: 100, duration: 0.4 } }
-    },
-    retina_detect: true
-  });
-
-  function openLink(url) {
-    window.location.href = url;
-  }
-  </script>
+  <div class="security">
+    <div class="security-icon"></div>
+    <span>Data anda dilindungi dengan sistem keamanan terenkripsi 🔒</span>
+  </div>
 </body>
 </html>
