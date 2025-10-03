@@ -92,28 +92,54 @@
       border-radius: 3px;
     }
 
+    /* 🔹 Tombol Panel */
     .btn-panel {
       flex: 0 0 auto;
       width: 260px;
       text-align: left;
       padding: 1.4rem 1.6rem;
       border-radius: 1rem;
-      border: 1px solid rgba(255,255,255,0.15);
-      background: rgba(15,15,15,0.7);
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(15,15,15,0.75);
       backdrop-filter: blur(10px);
       box-shadow: 0 0 15px rgba(255,255,255,0.05);
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.35s ease;
       position: relative;
       z-index: 3;
     }
 
+    /* Hover dan Active efek */
     .btn-panel:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 0 20px rgba(255,255,255,0.25);
-      border-color: rgba(255,255,255,0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 4px 25px rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.25);
     }
 
+    .btn-panel:active {
+      transform: scale(0.97);
+      box-shadow: 0 0 25px rgba(255,255,255,0.25);
+      border-color: rgba(255,255,255,0.35);
+    }
+
+    /* Glow samping saat diklik */
+    .btn-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 1rem;
+      background: linear-gradient(120deg, rgba(255,255,255,0.05), rgba(255,255,255,0.15));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    .btn-panel:active::before {
+      opacity: 1;
+      box-shadow: 0 0 20px rgba(255,255,255,0.15);
+    }
+
+    /* Teks tombol */
     .btn-panel i,
     .btn-panel .btn-title,
     .btn-panel .btn-desc {
@@ -137,6 +163,7 @@
     .btn-desc {
       font-size: 0.9rem;
       line-height: 1.4;
+      color: #c9c9c9;
     }
 
     /* Security Section */
@@ -161,12 +188,6 @@
       -webkit-text-fill-color: transparent;
       margin-top: 0.3rem;
       text-shadow: 0 0 10px rgba(255,255,255,0.2);
-      z-index: 2;
-    }
-
-    .security-section div {
-      flex: 1;
-      position: relative;
       z-index: 2;
     }
 
@@ -220,7 +241,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* 🌟 Popup Overlay */
+    /* Popup Overlay */
     .popup-overlay {
       position: fixed;
       top: 0; left: 0;
@@ -332,7 +353,7 @@
       <div class="btn-panel">
         <i class="fas fa-bullhorn"></i>
         <div class="btn-title">Announcement</div>
-        <div class="btn-desc">Menampilkan seluruh pengunguman terbaru</div>
+        <div class="btn-desc">Menampilkan seluruh pengumuman terbaru</div>
       </div>
 
       <div class="btn-panel">
