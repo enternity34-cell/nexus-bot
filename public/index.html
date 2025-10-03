@@ -1,197 +1,262 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DasBotz - Server</title>
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-
-    body {
-      min-height: 100vh;
-      background: radial-gradient(circle at center, #000 70%, #1a1a1a 100%);
-      color: #fff;
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    #particles-js { position: fixed; width: 100%; height: 100%; z-index: 1; background: transparent; pointer-events: none; }
-
-    .container { position: relative; z-index: 2; max-width: 1000px; margin: 0 auto; padding: 2rem; }
-
-    /* Header */
-    .header { text-align: left; margin-bottom: 2.5rem; animation: fadeIn 1s ease; }
-    .header .title-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem; }
-    .header i { font-size: 2rem; background: linear-gradient(90deg, #ffffff, #b0b0b0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .header h1 { font-size: 2.8rem; background: linear-gradient(90deg, #ffffff, #d1d5db); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; letter-spacing: 2px; }
-    .header p { font-size: 1rem; color: #c9c9c9; max-width: 600px; line-height: 1.6; }
-
-    /* Tombol Panel */
-    .button-row { display: flex; gap: 1.2rem; overflow-x: auto; scroll-behavior: smooth; padding: 1rem 0 1.5rem; }
-    .button-row::-webkit-scrollbar { height: 6px; }
-    .button-row::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
-
-    .btn-panel {
-      flex: 0 0 auto;
-      width: 260px;
-      text-align: left;
-      padding: 1.4rem 1.6rem;
-      border-radius: 1rem;
-      border: 1px solid rgba(255,255,255,0.15);
-      background: rgba(15,15,15,0.7);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 0 15px rgba(255,255,255,0.05);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      z-index: 3;
-    }
-
-    .btn-panel:hover { transform: translateY(-4px); box-shadow: 0 0 20px rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.3); }
-    .btn-panel i, .btn-panel .btn-title, .btn-panel .btn-desc { background: linear-gradient(90deg, #ffffff, #b0b0b0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .btn-panel i { font-size: 1.5rem; margin-bottom: 0.8rem; display: block; }
-    .btn-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.4rem; }
-    .btn-desc { font-size: 0.9rem; line-height: 1.4; }
-
-    /* Keamanan */
-    .security-section { margin-top: 3rem; background: rgba(255, 255, 255, 0.03); border-radius: 1rem; border: 1px solid rgba(255,255,255,0.08); padding: 1.5rem 2rem; display: flex; align-items: flex-start; gap: 1rem; animation: fadeInUp 1s ease; position: relative; overflow: hidden; }
-    .security-section::before { content: ""; position: absolute; top: 0; left: -80%; width: 60%; height: 100%; background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 30%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.05) 70%, rgba(255,255,255,0) 100%); filter: blur(12px); animation: shimmerFlow 6s linear infinite; z-index: 1; opacity: 0.8; }
-
-    @keyframes shimmerFlow { 0%{left:-80%;} 100%{left:120%;} }
-    @keyframes fadeIn { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
-    @keyframes fadeInUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
-
-    /* Popup Customer Service */
-    <!-- Popup Customer Service -->
-<div class="cs-popup" id="csPopup">
-  <a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-  <a href="https://t.me/username" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
-  <a href="https://discord.com/users/username" target="_blank"><i class="fab fa-discord"></i> Discord</a>
-  <a href="mailto:support@example.com"><i class="fas fa-envelope"></i> Gmail</a>
-</div>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DasBotz - Server</title>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
 <style>
-.cs-popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(15,15,15,0.95);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 1rem;
-  padding: 1.5rem 2rem;
-  min-width: 250px;
-  z-index: 9999;
-  display: none;
-  flex-direction: column;
-  gap: 1rem;
-  box-shadow: 0 0 30px rgba(255,255,255,0.25);
-  animation: fadeInUp 0.5s ease;
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+body {
+  min-height: 100vh;
+  background: radial-gradient(circle at center, #000 70%, #1a1a1a 100%);
+  color: #fff;
+  overflow-x: hidden;
+  position: relative;
 }
-.cs-popup a {
+
+#particles-js {
+  position: fixed; width: 100%; height: 100%;
+  z-index: 1;
+  background: transparent;
+  pointer-events: none;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Header */
+.header { text-align: left; margin-bottom: 2.5rem; animation: fadeIn 1s ease; }
+.header .title-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem; }
+.header i { font-size: 2rem; background: linear-gradient(90deg, #ffffff, #b0b0b0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.header h1 { font-size: 2.8rem; background: linear-gradient(90deg, #ffffff, #d1d5db); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; letter-spacing: 2px; }
+.header p { font-size: 1rem; color: #c9c9c9; max-width: 600px; line-height: 1.6; }
+
+/* Tombol Panel */
+.button-row {
+  display: flex; gap: 1.2rem;
+  overflow-x: auto; scroll-behavior: smooth;
+  padding: 1rem 0 1.5rem;
+}
+.button-row::-webkit-scrollbar { height: 6px; }
+.button-row::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
+
+.btn-panel {
+  flex: 0 0 auto;
+  width: 260px;
+  text-align: left;
+  padding: 1.4rem 1.6rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(15,15,15,0.7);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 15px rgba(255,255,255,0.05);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 3;
+}
+.btn-panel:hover { transform: translateY(-4px); box-shadow: 0 0 20px rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.3); }
+.btn-panel i, .btn-panel .btn-title, .btn-panel .btn-desc {
+  background: linear-gradient(90deg, #ffffff, #b0b0b0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.btn-panel i { font-size: 1.5rem; margin-bottom: 0.8rem; display: block; }
+.btn-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.4rem; }
+.btn-desc { font-size: 0.9rem; line-height: 1.4; }
+
+/* Keamanan */
+.security-section {
+  margin-top: 3rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 1rem;
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 1.5rem 2rem;
   display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  animation: fadeInUp 1s ease;
+  position: relative; overflow: hidden;
+}
+.security-section::before {
+  content: "";
+  position: absolute; top: 0; left: -80%;
+  width: 60%; height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 30%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.05) 70%, rgba(255,255,255,0) 100%);
+  filter: blur(12px);
+  animation: shimmerFlow 6s linear infinite;
+  z-index: 1; opacity: 0.8;
+}
+
+@keyframes shimmerFlow { 0%{left:-80%;} 100%{left:120%;} }
+@keyframes fadeIn { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+
+@media (max-width:768px) {
+  .header h1 { font-size: 2rem; }
+  .btn-panel { width: 220px; padding: 1.2rem; }
+  .btn-title { font-size: 1rem; }
+  .btn-desc { font-size: 0.85rem; }
+}
+
+/* Popup CS Tengah */
+.cs-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 0.6rem;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 9999;
+  transition: all 0.3s ease;
+}
+.cs-popup-overlay.show { opacity: 1; visibility: visible; }
+
+.cs-popup-card {
+  background: rgba(20,20,20,0.95);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 1rem;
+  padding: 2rem 2.2rem;
+  text-align: center;
+  width: 300px;
+  max-width: 90%;
+  animation: popupShow 0.4s ease forwards;
+}
+@keyframes popupShow { 0% { transform: scale(0.7); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+.cs-popup-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg,#fff,#bfbfbf);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.cs-links { display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 1.5rem; }
+.cs-links a {
+  display: flex; align-items: center; gap: 0.6rem;
   text-decoration: none;
   color: #fff;
   padding: 0.6rem;
   border-radius: 0.6rem;
   transition: all 0.2s ease;
+  background: rgba(255,255,255,0.05);
 }
-.cs-popup a:hover { background: rgba(255,255,255,0.1); }
+.cs-links a:hover { background: rgba(255,255,255,0.15); }
+
+.cs-close-btn {
+  padding: 0.7rem 1.5rem;
+  border-radius: 0.7rem;
+  border: none;
+  background: linear-gradient(135deg,#fff,#dcdcdc);
+  color: #111;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.cs-close-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,255,255,0.25); }
+
 </style>
 </head>
 <body>
-  <div id="particles-js"></div>
+<div id="particles-js"></div>
 
-  <div class="container">
-    <header class="header">
-      <div class="title-row">
-        <i class="fas fa-gamepad"></i>
-        <h1>DasBotz</h1>
-      </div>
-      <p>Mengelola server secara efisien, aman, dan fleksibel dengan sistem berbasis kontrol penuh.</p>
-    </header>
+<div class="container">
+  <header class="header">
+    <div class="title-row">
+      <i class="fas fa-gamepad"></i>
+      <h1>DasBotz</h1>
+    </div>
+    <p>Mengelola server secara efisien, aman, dan fleksibel dengan sistem berbasis kontrol penuh.</p>
+  </header>
 
-    <div class="button-row">
-      <div class="btn-panel"><i class="fas fa-user-cog"></i>
-        <div class="btn-title">Account</div>
-        <div class="btn-desc">Login ke akun anda dan dapatkan akses penuh ke akun bot anda.</div>
-      </div>
-
-      <div class="btn-panel"><i class="fas fa-robot"></i>
-        <div class="btn-title">Bot</div>
-        <div class="btn-desc">Menampilkan semua bot yg tersedia</div>
-      </div>
-
-      <div class="btn-panel"><i class="fas fa-bullhorn"></i>
-        <div class="btn-title">Announcement</div>
-        <div class="btn-desc">Menampilkan seluruh pengunguman terbaru</div> 
-      </div>
-
-      <div class="btn-panel cs-btn"><i class="fas fa-headset"></i>
-        <div class="btn-title">Customer Service</div>
-        <div class="btn-desc">Dapatkan bantuan langsung dari tim dukungan kami.</div>
-      </div>
+  <div class="button-row">
+    <div class="btn-panel"><i class="fas fa-user-cog"></i>
+      <div class="btn-title">Account</div>
+      <div class="btn-desc">Login ke akun anda dan dapatkan akses penuh ke akun bot anda.</div>
     </div>
 
-    <section class="security-section">
-      <i class="fas fa-lock"></i>
-      <div>
-        <h2>Keamanan Sistem</h2>
-        <p>Semua koneksi dilindungi oleh enkripsi 256-bit dan sistem autentikasi berlapis. Setiap aktivitas terekam secara real-time untuk menjaga integritas data dan mencegah penyalahgunaan.</p>
-      </div>
-    </section>
+    <div class="btn-panel"><i class="fas fa-robot"></i>
+      <div class="btn-title">Bot</div>
+      <div class="btn-desc">Menampilkan semua bot yg tersedia</div>
+    </div>
+
+    <div class="btn-panel"><i class="fas fa-bullhorn"></i>
+      <div class="btn-title">Announcement</div>
+      <div class="btn-desc">Menampilkan seluruh pengunguman terbaru</div> 
+    </div>
+
+    <div class="btn-panel cs-btn"><i class="fas fa-headset"></i>
+      <div class="btn-title">Custom Service</div>
+      <div class="btn-desc">Dapatkan bantuan langsung dari tim dukungan kami.</div>
+    </div>
   </div>
 
-  <!-- Popup Customer Service -->
-  <div class="cs-popup" id="csPopup">
-    <a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-    <a href="https://t.me/username" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
-    <a href="https://discord.com/users/username" target="_blank"><i class="fab fa-discord"></i> Discord</a>
-    <a href="mailto:support@example.com"><i class="fas fa-envelope"></i> Gmail</a>
+  <section class="security-section">
+    <i class="fas fa-lock"></i>
+    <div>
+      <h2>Keamanan Sistem</h2>
+      <p>Semua koneksi dilindungi oleh enkripsi 256-bit dan sistem autentikasi berlapis. Setiap aktivitas terekam secara real-time untuk menjaga integritas data dan mencegah penyalahgunaan.</p>
+    </div>
+  </section>
+</div>
+
+<!-- Popup CS Tengah -->
+<div class="cs-popup-overlay" id="csPopup">
+  <div class="cs-popup-card">
+    <h3>Customer Service</h3>
+    <p>Pilih platform untuk menghubungi tim kami:</p>
+    <div class="cs-links">
+      <a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <a href="https://t.me/username" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
+      <a href="https://discord.gg/example" target="_blank"><i class="fab fa-discord"></i> Discord</a>
+      <a href="mailto:cs@example.com" target="_blank"><i class="fas fa-envelope"></i> Gmail</a>
+    </div>
+    <button class="cs-close-btn" id="closeCsPopup">Tutup</button>
   </div>
+</div>
 
-  <script>
-    // Particles.js
-    particlesJS('particles-js', {
-      particles: {
-        number: { value: 100 },
-        color: { value: '#ffffff' },
-        shape: { type: 'circle' },
-        opacity: { value: 0.8 },
-        size: { value: 2.5 },
-        line_linked: { enable: true, distance: 150, color: '#fff', opacity: 0.2, width: 1 },
-        move: { enable: true, speed: 1.2 }
-      },
-      interactivity: { events: { onhover: { enable: true, mode: "repulse" } }, modes: { repulse: { distance: 100, duration: 0.4 } } },
-      retina_detect: true
-    });
+<script>
+particlesJS('particles-js', {
+  particles: {
+    number: { value: 100 },
+    color: { value: '#ffffff' },
+    shape: { type: 'circle' },
+    opacity: { value: 0.8 },
+    size: { value: 2.5 },
+    line_linked: { enable: true, distance: 150, color: '#fff', opacity: 0.2, width: 1 },
+    move: { enable: true, speed: 1.2 }
+  },
+  interactivity: {
+    events: { onhover: { enable: true, mode: "repulse" } },
+    modes: { repulse: { distance: 100, duration: 0.4 } }
+  },
+  retina_detect: true
+});
 
-    // Tombol Account
-    document.querySelectorAll('.btn-panel').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const title = btn.querySelector('.btn-title').innerText;
-        if(title === 'Account') window.location.href = "/login";
-        if(title === 'Customer Service') toggleCsPopup();
-      });
-    });
+// Account tombol redirect
+document.querySelectorAll('.btn-panel').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const title = btn.querySelector('.btn-title').innerText;
+    if (title === 'Account') window.location.href = "/login";
+  });
+});
 
-    const csPopup = document.getElementById('csPopup');
-    function toggleCsPopup() {
-      csPopup.style.display = csPopup.style.display === 'flex' ? 'none' : 'flex';
-    }
-
-    // Klik di luar popup untuk menutup
-    window.addEventListener('click', e => {
-      if (!e.target.closest('.cs-btn') && !e.target.closest('#csPopup')) {
-        csPopup.style.display = 'none';
-      }
-    });
-  </script>
+// Customer Service popup
+const csPopup = document.getElementById('csPopup');
+document.querySelector('.cs-btn').addEventListener('click', () => csPopup.classList.add('show'));
+document.getElementById('closeCsPopup').addEventListener('click', () => csPopup.classList.remove('show'));
+</script>
 </body>
 </html>
