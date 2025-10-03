@@ -84,8 +84,8 @@ app.get('/nodes', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'nodes.html'));
 });
 
-app.get('/buy/panel', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'panel.html'));
+app.get('/register', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'register.html'));
 });
 
 app.get('/buy/admin', (req, res) => {
