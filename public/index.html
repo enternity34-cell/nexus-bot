@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>パネル - Control Server</title>
   
   <!-- Particles.js -->
@@ -23,7 +23,6 @@
     body {
       min-height: 100vh;
       background: radial-gradient(circle at center, #000 70%, #1a1a1a 100%);
-      background-blend-mode: overlay;
       color: #fff;
       overflow-x: hidden;
       position: relative;
@@ -73,7 +72,7 @@
     /* Scrollable Button Row */
     .button-row {
       display: flex;
-      gap: 1.2rem;
+      gap: 1.5rem;
       overflow-x: auto;
       padding-bottom: 1rem;
       scroll-behavior: smooth;
@@ -88,36 +87,36 @@
       border-radius: 3px;
     }
 
-    /* Tombol Futuristik */
+    /* Tombol besar futuristik */
     .btn-panel {
       flex: 0 0 auto;
-      padding: 1.2rem 2rem;
-      border-radius: 0.8rem;
+      padding: 1.6rem 2.6rem;
+      border-radius: 1rem;
       border: 1px solid rgba(255, 255, 255, 0.15);
       background: rgba(15, 15, 15, 0.7);
       backdrop-filter: blur(10px);
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.06);
       color: #fff;
-      font-weight: 500;
-      font-size: 1.05rem;
+      font-weight: 600;
+      font-size: 1.1rem;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 0.8rem;
+      gap: 1rem;
       transition: all 0.3s ease;
       position: relative;
     }
 
     .btn-panel i {
-      font-size: 1.2rem;
-      background: linear-gradient(90deg, #ffffff, #e5e5e5);
+      font-size: 1.4rem;
+      background: linear-gradient(90deg, #ffffff, #d1d5db);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .btn-panel:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.25);
       border-color: rgba(255, 255, 255, 0.3);
     }
 
@@ -127,18 +126,21 @@
       background: rgba(255, 255, 255, 0.03);
       border-radius: 1rem;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 1.5rem 2rem;
+      padding: 1.8rem 2rem;
       display: flex;
       align-items: flex-start;
-      gap: 1rem;
+      gap: 1.2rem;
       animation: fadeInUp 1s ease;
     }
 
+    /* Gembok gradiasi putih-abu */
     .security-section i {
-      font-size: 1.8rem;
-      color: #00ffcc;
-      margin-top: 0.3rem;
-      text-shadow: 0 0 10px rgba(0,255,204,0.5);
+      font-size: 2.2rem;
+      background: linear-gradient(135deg, #ffffff, #b0b0b0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+      margin-top: 0.2rem;
     }
 
     .security-section div {
@@ -146,15 +148,15 @@
     }
 
     .security-section h2 {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       color: #fff;
       margin-bottom: 0.5rem;
     }
 
     .security-section p {
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: #bdbdbd;
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
     @keyframes fadeIn {
@@ -168,8 +170,11 @@
     }
 
     @media (max-width: 768px) {
-      .header h1 { font-size: 2rem; }
-      .btn-panel { font-size: 0.95rem; padding: 1rem 1.4rem; }
+      .header h1 { font-size: 2.2rem; }
+      .btn-panel {
+        padding: 1.4rem 2rem;
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
@@ -182,6 +187,7 @@
       <p>Mengelola server secara efisien, aman, dan fleksibel dengan sistem berbasis kontrol penuh.</p>
     </header>
 
+    <!-- Tombol scrollable -->
     <div class="button-row">
       <button class="btn-panel" onclick="openLink('/buy/panel')">
         <i class="fas fa-rocket"></i> Beli Panel
@@ -197,13 +203,14 @@
       </button>
     </div>
 
+    <!-- Bagian pengaman -->
     <section class="security-section">
       <i class="fas fa-lock"></i>
       <div>
         <h2>Keamanan Sistem</h2>
         <p>
           Semua koneksi dilindungi oleh enkripsi 256-bit dan sistem autentikasi berlapis.
-          Setiap aktivitas terekam secara real-time untuk menjaga integritas data dan mencegah penyalahgunaan.
+          Setiap aktivitas dicatat secara real-time untuk memastikan integritas sistem dan mencegah penyalahgunaan.
         </p>
       </div>
     </section>
@@ -225,18 +232,11 @@
         opacity: 0.2,
         width: 1,
       },
-      move: {
-        enable: true,
-        speed: 1.2,
-      }
+      move: { enable: true, speed: 1.2 }
     },
     interactivity: {
-      events: {
-        onhover: { enable: true, mode: "repulse" },
-      },
-      modes: {
-        repulse: { distance: 100, duration: 0.4 },
-      }
+      events: { onhover: { enable: true, mode: "repulse" } },
+      modes: { repulse: { distance: 100, duration: 0.4 } }
     },
     retina_detect: true
   });
