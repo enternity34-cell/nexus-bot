@@ -272,7 +272,7 @@
   <!-- 🌟 Popup -->
   <div class="popup-overlay" id="popup">
     <div class="popup-card">
-      <h3>Pilih Aksi</h3>
+      <h3>Opsi</h3>
       <p class="popup-desc">Pilih opsi <strong>Masuk</strong> atau <strong>Daftar</strong>.<br>Jika sudah memiliki akun, silakan tekan <em>Masuk</em>.</p>
       <div class="popup-buttons">
         <button class="popup-btn"><i class="fas fa-sign-in-alt"></i> Masuk</button>
@@ -282,34 +282,52 @@
   </div>
 
   <script>
-    // Particles.js
-    particlesJS('particles-js', {
-      particles: {
-        number: { value: 100 },
-        color: { value: '#ffffff' },
-        shape: { type: 'circle' },
-        opacity: { value: 0.8 },
-        size: { value: 2.5 },
-        line_linked: { enable: true, distance: 150, color: '#fff', opacity: 0.2, width: 1 },
-        move: { enable: true, speed: 1.2 }
-      },
-      interactivity: { events: { onhover: { enable: true, mode: "repulse" } }, modes: { repulse: { distance: 100, duration: 0.4 } } },
-      retina_detect: true
-    });
+  // Particles.js
+  particlesJS('particles-js', {
+    particles: {
+      number: { value: 100 },
+      color: { value: '#ffffff' },
+      shape: { type: 'circle' },
+      opacity: { value: 0.8 },
+      size: { value: 2.5 },
+      line_linked: { enable: true, distance: 150, color: '#fff', opacity: 0.2, width: 1 },
+      move: { enable: true, speed: 1.2 }
+    },
+    interactivity: {
+      events: { onhover: { enable: true, mode: "repulse" } },
+      modes: { repulse: { distance: 100, duration: 0.4 } }
+    },
+    retina_detect: true
+  });
 
-    // Popup trigger dari tombol Account
-    document.querySelectorAll('.btn-panel').forEach(btn => {
-      btn.addEventListener('click', () => {
-        if (btn.querySelector('.btn-title').innerText === 'Account') {
-          document.getElementById('popup').classList.add('show');
-        }
-      });
+  // Buka popup saat klik Account
+  document.querySelectorAll('.btn-panel').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (btn.querySelector('.btn-title').innerText === 'Account') {
+        document.getElementById('popup').classList.add('show');
+      }
     });
+  });
 
-    // Tutup popup saat klik di luar card
-    document.getElementById('popup').addEventListener('click', (e) => {
-      if (e.target.id === 'popup') e.target.classList.remove('show');
-    });
-  </script>
+  // Tutup popup saat klik di luar card
+  document.getElementById('popup').addEventListener('click', (e) => {
+    if (e.target.id === 'popup') e.target.classList.remove('show');
+  });
+
+  // 🎯 Aksi tombol popup
+  const popup = document.getElementById('popup');
+  const btnMasuk = popup.querySelectorAll('.popup-btn')[0];
+  const btnDaftar = popup.querySelectorAll('.popup-btn')[1];
+
+  // Saat klik tombol Masuk → pindah ke /login
+  btnMasuk.addEventListener('click', () => {
+    window.location.href = "/login";
+  });
+
+  // Saat klik tombol Daftar → pindah ke /register (atau ubah sesuai rute kamu)
+  btnDaftar.addEventListener('click', () => {
+    window.location.href = "/register";
+  });
+</script>
 </body>
 </html>
