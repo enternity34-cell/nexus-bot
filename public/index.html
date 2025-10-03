@@ -46,6 +46,16 @@
       text-align: left;
       margin-bottom: 2.5rem;
       animation: fadeIn 1s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .header i {
+      font-size: 2rem;
+      background: linear-gradient(90deg, #ffffff, #b0b0b0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .header h1 {
@@ -155,6 +165,7 @@
       -webkit-text-fill-color: transparent;
       margin-top: 0.3rem;
       text-shadow: 0 0 10px rgba(255,255,255,0.2);
+      z-index: 2;
     }
 
     .security-section div {
@@ -177,32 +188,34 @@
       line-height: 1.6;
     }
 
-    /* ✨ Efek silau halus */
+    /* ✨ Efek silau dua arah super lembut */
     .security-section::before {
       content: "";
       position: absolute;
-      top: 0;
-      left: -80%;
-      width: 80%;
-      height: 100%;
-      background: linear-gradient(
-        120deg,
-        rgba(255, 255, 255, 0) 0%,
+      top: -30%;
+      left: -100%;
+      width: 100%;
+      height: 160%;
+      background: radial-gradient(
+        ellipse at center,
+        rgba(255, 255, 255, 0.10) 0%,
         rgba(255, 255, 255, 0.05) 25%,
-        rgba(255, 255, 255, 0.15) 50%,
-        rgba(255, 255, 255, 0.05) 75%,
-        rgba(255, 255, 255, 0) 100%
+        rgba(255, 255, 255, 0.02) 60%,
+        rgba(255, 255, 255, 0.0) 100%
       );
-      z-index: 1;
-      animation: shineMove 6s ease-in-out infinite;
+      transform: rotate(25deg);
+      filter: blur(18px);
+      animation: shineSweep 8s ease-in-out infinite alternate;
       pointer-events: none;
-      filter: blur(2px);
+      z-index: 1;
     }
 
-    @keyframes shineMove {
-      0% { left: -80%; }
-      50% { left: 120%; }
-      100% { left: 120%; }
+    @keyframes shineSweep {
+      0% { left: -120%; opacity: 0.8; }
+      25% { left: -40%; opacity: 0.9; }
+      50% { left: 120%; opacity: 0.7; }
+      75% { left: 40%; opacity: 0.9; }
+      100% { left: -120%; opacity: 0.8; }
     }
 
     @keyframes fadeIn {
@@ -228,7 +241,8 @@
 
   <div class="container">
     <header class="header">
-      <h1>🎮パネル</h1>
+      <i class="fas fa-gamepad"></i>
+      <h1>パネル</h1>
       <p>Mengelola server secara efisien, aman, dan fleksibel dengan sistem berbasis kontrol penuh.</p>
     </header>
 
